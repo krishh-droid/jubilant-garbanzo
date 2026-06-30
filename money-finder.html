@@ -129,6 +129,25 @@
   .empty{text-align:center;padding:60px 20px;color:var(--muted)}
   .empty span{font-size:3rem;display:block;margin-bottom:12px}
   #restart-btn{margin-bottom:24px}
+
+  /* LOADING */
+  .loading-state{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;
+    gap:16px;padding:60px 20px;color:var(--muted);text-align:center}
+  .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);
+    border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* AI RESULT CARD EXTRAS */
+  .ai-banner{display:flex;align-items:center;gap:9px;background:#120e25;
+    border:1px solid #4c1d95;border-radius:10px;padding:10px 16px;margin-bottom:20px;
+    font-size:.82rem;color:#c4b5fd}
+  .rc-why{font-size:.81rem;color:#94a3b8;line-height:1.5;margin-bottom:8px;
+    padding:7px 10px;background:#0a1020;border-left:2px solid var(--accent);border-radius:0 6px 6px 0}
+  .rc-earn{font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:8px;
+    padding:5px 10px;background:#0d2a1e;border-radius:6px;display:inline-block}
+  .rc-start{font-size:.79rem;color:var(--muted);line-height:1.5;margin-bottom:10px}
+  .error-state{grid-column:1/-1;text-align:center;padding:40px 20px}
+  .error-state span{font-size:2rem;display:block;margin-bottom:10px;color:#f87171}
 </style>
 </head>
 <body>
@@ -588,15 +607,21 @@ function go(n){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function showResults(){
-  const skills  = getSelected('skill-chips');
-  const capital = getSelected('capital-chips')[0]||'none';
-  const style   = getSelected('style-chips')[0]||'both';
-  const prefs   = getSelected('pref-chips');
-  const hours   = parseInt(document.getElementById('time-slider').value);
-  const capRank = {none:0,low:1,medium:2,high:3};
+// Label maps for API payload
+const SKILL_LABELS={writing:'Writing',design:'Design',coding:'Coding',video:'Video / Editing',
+  marketing:'Marketing',teaching:'Teaching',sales:'Sales',finance:'Finance',music:'Music / Audio',
+  photo:'Photography',craft:'Crafts / Art',driving:'Driving',cooking:'Cooking',fitness:'Fitness',
+  language:'Languages',pets:'Pets / Animals',research:'Research',admin:'Admin / Organisation'};
+const CAPITAL_LABELS={none:'$0 — Zero budget',low:'Up to $100',medium:'$100–$1,000',high:'$1,000+'};
+const STYLE_LABELS={online:'Online / Remote',offline:'Local / In-person',both:'Either is fine'};
+const GOAL_LABELS={low:'$200/month — A little extra',mid:'$500/month — Side hustle',
+  high:'$1,500/month — Serious income',full:'$3,000+/month — Full income'};
+const PREF_LABELS={fast:'Fast to start',passive:'Passive income',scalable:'Scalable',
+  flexible:'Flexible hours',creative:'Creative work',lowrisk:'Low risk'};
 
-  const scored = IDEAS.map(idea=>{
+function runStaticMatch(skills,capital,style,prefs,hours){
+  const capRank={none:0,low:1,medium:2,high:3};
+  return IDEAS.map(idea=>{
     let score=0;
     if(idea.skills.length===0) score+=5;
     else score+=idea.skills.filter(s=>skills.includes(s)).length*20;
@@ -608,24 +633,86 @@ function showResults(){
     prefs.forEach(p=>{ if(idea[p]) score+=12; });
     return {...idea,score};
   }).filter(i=>i.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
+}
 
-  const cats=['All',...new Set(scored.map(i=>i.cat))];
+async function showResults(){
+  const skills  = getSelected('skill-chips');
+  const capital = getSelected('capital-chips')[0]||'none';
+  const style   = getSelected('style-chips')[0]||'both';
+  const prefs   = getSelected('pref-chips');
+  const hours   = parseInt(document.getElementById('time-slider').value);
+  const incomeGoal = getSelected('goal-chips')[0]||'mid';
+
+  // Switch to results panel immediately
+  go(4);
 
   document.getElementById('summary-bar').innerHTML=`
-    <div class="sum-stat"><div class="sum-val">${scored.length}</div><div class="sum-lbl">Matches Found</div></div>
+    <div class="sum-stat"><div class="sum-val">${skills.length||'Any'}</div><div class="sum-lbl">Skills</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">${skills.length||'Any'}</div><div class="sum-lbl">Skills Matched</div></div>
+    <div class="sum-stat"><div class="sum-val">${hours}h</div><div class="sum-lbl">Per Week</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">${hours}h</div><div class="sum-lbl">Available / Week</div></div>
+    <div class="sum-stat"><div class="sum-val">${(GOAL_LABELS[incomeGoal]||incomeGoal).split('/')[0]}</div><div class="sum-lbl">Goal</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">${prefs.length||0}</div><div class="sum-lbl">Preferences Set</div></div>`;
+    <div class="sum-stat"><div class="sum-val">🤖 AI</div><div class="sum-lbl">Live Search</div></div>`;
 
-  document.getElementById('filter-bar').innerHTML='<span>Filter:</span>'+
-    cats.map(c=>`<div class="f-chip${c==='All'?' active':''}" onclick="filterCat(this,'${c}')">${c}</div>`).join('');
+  document.getElementById('filter-bar').innerHTML='';
+  document.getElementById('results-grid').innerHTML=`
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Searching the web for current opportunities…<br><small>This takes 10–20 seconds</small></p>
+    </div>`;
 
-  window._cards=scored;
-  renderCards(scored,'All');
-  go(4);
+  const quizAnswers={
+    skills: skills.map(s=>SKILL_LABELS[s]||s),
+    timePerWeek: hours+' hrs/week',
+    budget: CAPITAL_LABELS[capital]||capital,
+    workStyle: STYLE_LABELS[style]||style,
+    incomeGoal: GOAL_LABELS[incomeGoal]||incomeGoal,
+    priority: prefs.map(p=>PREF_LABELS[p]||p).join(', ')||'not specified',
+  };
+
+  try {
+    const res=await fetch('/api/find-income',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(quizAnswers),
+    });
+    if(!res.ok) throw new Error('API '+res.status);
+    const data=await res.json();
+    renderAISuggestions(data.suggestions);
+  } catch(err){
+    console.warn('AI search failed, using static results:',err);
+    const scored=runStaticMatch(skills,capital,style,prefs,hours);
+    const cats=['All',...new Set(scored.map(i=>i.cat))];
+    document.getElementById('filter-bar').innerHTML='<span>Filter:</span>'+
+      cats.map(c=>`<div class="f-chip${c==='All'?' active':''}" onclick="filterCat(this,'${c}')">${c}</div>`).join('');
+    window._cards=scored;
+    renderCards(scored,'All');
+  }
+}
+
+function renderAISuggestions(suggestions){
+  const grid=document.getElementById('results-grid');
+  if(!suggestions||!suggestions.length){
+    grid.innerHTML='<div class="empty"><span>🔍</span>No matches found — try adjusting your answers.</div>';
+    return;
+  }
+  grid.innerHTML=`<div class="ai-banner" style="grid-column:1/-1">
+    🤖 <strong>AI-powered results</strong> — searched the web right now for current opportunities
+  </div>`+suggestions.map(s=>`
+    <div class="result-card">
+      <div class="rc-top">
+        <div class="rc-icon">✨</div>
+        <div class="rc-badges"><span class="badge-earn">${s.estimatedEarning}</span></div>
+      </div>
+      <div class="rc-title">${s.title}</div>
+      <div class="rc-desc">${s.description}</div>
+      <div class="rc-why"><strong>Why this fits you:</strong> ${s.whyItFits}</div>
+      <div class="rc-start"><strong>How to start:</strong> ${s.startupSteps}</div>
+      <div class="rc-links">
+        <a class="rc-link" href="${s.link}" target="_blank" rel="noopener">↗ Get Started</a>
+      </div>
+    </div>`).join('');
 }
 
 function filterCat(el,cat){
