@@ -1,4 +1,7 @@
 {
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/", "destination": "/money-finder.html", "permanent": false }
+  ]
 }
