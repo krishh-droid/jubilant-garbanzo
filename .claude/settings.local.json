@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:theorg.com)",
+      "WebFetch(domain:indiantelevision.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:www.zoominfo.com)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Dell\\\\Documents\\\\my-first-project\\\\rima-ashraf.html\")",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:picuki.com)",
+      "WebFetch(domain:imginn.com)",
+      "WebFetch(domain:www.gramho.com)",
+      "WebFetch(domain:www.ruskmedia.com)",
+      "PowerShell(Start-Process \"https://www.instagram.com/rima.ashraf/\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Dell\\\\Documents\\\\my-first-project\\\\money-finder.html\")",
+      "PowerShell(git *)",
+      "Bash(git --version)",
+      "Bash(gh api *)",
+      "PowerShell(gh api *)",
+      "PowerShell(Start-Process \"https://krishh-droid.github.io/jubilant-garbanzo/\")"
+    ]
+  }
+}
