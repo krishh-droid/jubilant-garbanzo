@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rima Ashraf — Rusk Media</title>
+  <title>Rima Ashraf — Rusk Media · KrishTools</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,11 +27,27 @@
       min-height: 100vh;
     }
 
+    /* Shared Nav */
+    .site-nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:rgba(10,10,15,.88);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .nav-logo{font-size:1rem;font-weight:800;
+      background:linear-gradient(90deg,#fff,#c9b8ff);-webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+    .nav-links{display:flex;gap:5px}
+    .nav-lnk{padding:6px 12px;border-radius:7px;font-size:.8rem;color:var(--muted);
+      text-decoration:none;transition:.15s;border:1px solid transparent}
+    .nav-lnk:hover{color:var(--text);background:#1a1a25;border-color:var(--border)}
+    .nav-lnk.cur{color:#b49fff;background:#1e1e30;border-color:var(--accent)}
+
     /* ── Hero ── */
     .hero {
       background: linear-gradient(135deg, #0d0d18 0%, #12082a 50%, #0a0d1f 100%);
       border-bottom: 1px solid var(--border);
-      padding: 80px 24px 60px;
+      padding: 116px 24px 60px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -314,6 +330,15 @@
   </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">KrishTools</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-lnk">Home</a>
+    <a href="money-finder.html" class="nav-lnk">💰 Income Finder</a>
+    <a href="rima-ashraf.html" class="nav-lnk cur">👤 Rima Ashraf</a>
+  </div>
+</nav>
 
   <!-- ── HERO ── -->
   <header class="hero">

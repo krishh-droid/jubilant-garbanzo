@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Side Income Finder</title>
+<title>Side Income Finder — KrishTools</title>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -14,11 +14,27 @@
   }
   body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
 
+  /* Shared Nav */
+  .site-nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(11,15,26,.88);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-logo{font-size:1rem;font-weight:800;
+    background:linear-gradient(90deg,#fff,#93c5fd);-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+  .nav-links{display:flex;gap:5px}
+  .nav-lnk{padding:6px 12px;border-radius:7px;font-size:.8rem;color:var(--muted);
+    text-decoration:none;transition:.15s;border:1px solid transparent}
+  .nav-lnk:hover{color:var(--text);background:#111827;border-color:var(--border)}
+  .nav-lnk.cur{color:#93c5fd;background:#0f1e36;border-color:var(--accent)}
+
   /* Header */
   header{
     background:linear-gradient(135deg,#0d1b2e 0%,#0b1628 100%);
     border-bottom:1px solid var(--border);
-    padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;
+    padding:96px 24px 32px;text-align:center;position:relative;overflow:hidden;
   }
   header::before{
     content:'';position:absolute;inset:0;
@@ -234,6 +250,15 @@
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">KrishTools</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-lnk">Home</a>
+    <a href="money-finder.html" class="nav-lnk cur">💰 Income Finder</a>
+    <a href="rima-ashraf.html" class="nav-lnk">👤 Rima Ashraf</a>
+  </div>
+</nav>
 
 <header>
   <h1>💰 Side Income Finder</h1>

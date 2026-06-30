@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KrishTools — Your Personal Toolkit</title>
+<meta name="description" content="A collection of smart tools and profiles built with AI."/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080c14;--surface:#0f1623;--card:#141e2e;--border:#1e2d45;
+    --accent:#3b82f6;--accent2:#06b6d4;--purple:#7c3aed;--green:#10b981;
+    --text:#e2e8f0;--muted:#64748b;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(8,12,20,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:-0.3px;
+    background:linear-gradient(90deg,#fff,#93c5fd);-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+  .nav-links{display:flex;gap:6px}
+  .nav-link{padding:7px 14px;border-radius:8px;font-size:.85rem;color:var(--muted);
+    text-decoration:none;transition:.15s;border:1px solid transparent}
+  .nav-link:hover{color:var(--text);background:var(--surface);border-color:var(--border)}
+  .nav-link.active{color:#93c5fd;background:#0f1e36;border-color:var(--accent)}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:80px 24px 60px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%,rgba(59,130,246,.18) 0%,transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 60%,rgba(124,58,237,.12) 0%,transparent 50%),
+      radial-gradient(ellipse 40% 40% at 20% 70%,rgba(6,182,212,.08) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:7px;
+    background:#0f1e36;border:1px solid #1e3a6a;border-radius:20px;
+    padding:6px 16px;font-size:.78rem;color:#93c5fd;margin-bottom:28px;
+  }
+  .hero-badge span{width:7px;height:7px;border-radius:50%;background:#3b82f6;
+    box-shadow:0 0 8px #3b82f6;display:inline-block}
+  .hero h1{
+    font-size:clamp(2.5rem,7vw,5rem);font-weight:800;letter-spacing:-1.5px;line-height:1.05;
+    background:linear-gradient(160deg,#fff 30%,#93c5fd 70%,#7c3aed);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-bottom:20px;
+  }
+  .hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--muted);max-width:560px;line-height:1.6;margin-bottom:40px}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn-hero{
+    padding:14px 28px;border-radius:12px;font-size:.95rem;font-weight:700;
+    text-decoration:none;transition:.15s;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+  .btn-primary:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,.3)}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--text);transform:translateY(-2px)}
+
+  /* SCROLL HINT */
+  .scroll-hint{margin-top:60px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.78rem}
+  .scroll-dot{width:6px;height:32px;border:1px solid var(--border);border-radius:3px;position:relative}
+  .scroll-dot::after{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);
+    width:3px;height:6px;border-radius:2px;background:var(--muted);
+    animation:scrolldown 1.6s ease-in-out infinite}
+  @keyframes scrolldown{0%{top:4px;opacity:1}100%{top:18px;opacity:0}}
+
+  /* SECTION */
+  section{max-width:1100px;margin:0 auto;padding:80px 24px}
+  .section-label{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:600;margin-bottom:10px}
+  .section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.5px;margin-bottom:12px}
+  .section-sub{color:var(--muted);font-size:.95rem;max-width:500px;line-height:1.6}
+
+  /* TOOLS GRID */
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:40px}
+  .tool-card{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:28px;text-decoration:none;color:inherit;display:block;
+    transition:.2s;position:relative;overflow:hidden;
+  }
+  .tool-card::before{
+    content:'';position:absolute;inset:0;opacity:0;transition:.3s;
+    background:radial-gradient(ellipse 80% 80% at 50% 0%,rgba(59,130,246,.08),transparent);
+  }
+  .tool-card:hover{border-color:#2a4a7f;transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .tool-card:hover::before{opacity:1}
+  .tc-icon{font-size:2.4rem;margin-bottom:16px;display:block}
+  .tc-tag{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;
+    padding:3px 10px;border-radius:6px;margin-bottom:14px}
+  .tag-tool{background:#0f1e36;border:1px solid #1e3a6a;color:#93c5fd}
+  .tag-profile{background:#1a0a2e;border:1px solid #4c1d95;color:#c4b5fd}
+  .tag-new{background:#0d2a1e;border:1px solid #065f46;color:#34d399}
+  .tc-title{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+  .tc-desc{font-size:.875rem;color:var(--muted);line-height:1.6;margin-bottom:20px}
+  .tc-arrow{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;
+    color:var(--accent);font-weight:600;transition:.15s}
+  .tool-card:hover .tc-arrow{gap:10px}
+  .tc-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+  .tc-pill{background:#0a1020;border:1px solid var(--border);border-radius:5px;
+    padding:3px 9px;font-size:.72rem;color:var(--muted)}
+
+  /* STATS */
+  .stats-row{display:flex;flex-wrap:wrap;gap:0;margin-top:60px;
+    background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .stat{flex:1;min-width:140px;padding:28px 24px;text-align:center;border-right:1px solid var(--border)}
+  .stat:last-child{border-right:none}
+  .stat-val{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .stat-lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:40px}
+  .feat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+  .feat-icon{font-size:1.6rem;margin-bottom:12px}
+  .feat-title{font-size:.95rem;font-weight:700;margin-bottom:6px}
+  .feat-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;
+    font-size:.82rem;color:var(--muted)}
+  footer a{color:var(--accent);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .footer-links{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">KrishTools</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="money-finder.html" class="nav-link">💰 Income Finder</a>
+    <a href="rima-ashraf.html" class="nav-link">👤 Rima Ashraf</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span></span> Live on GitHub Pages</div>
+  <h1>Your Personal<br/>Toolkit</h1>
+  <p class="hero-sub">Smart tools, profiles, and resources — built fast, designed beautifully, deployed instantly.</p>
+  <div class="hero-btns">
+    <a href="money-finder.html" class="btn-hero btn-primary">💰 Find Side Income →</a>
+    <a href="#tools" class="btn-hero btn-ghost">Explore Tools</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-dot"></div>
+    scroll to explore
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-label">What's Inside</div>
+  <h2 class="section-title">Tools & Profiles</h2>
+  <p class="section-sub">Everything built in one place — open any tool below to get started.</p>
+
+  <div class="tools-grid">
+
+    <a href="money-finder.html" class="tool-card">
+      <span class="tc-icon">💰</span>
+      <div class="tc-tag tag-tool">🛠️ Interactive Tool</div>
+      <div class="tc-tag tag-new" style="margin-left:6px">✨ New</div>
+      <div class="tc-title">Side Income Finder</div>
+      <div class="tc-desc">Answer 3 quick questions about your skills, time, and goals — get a personalised ranked list of ways to earn more money, matched to the Indian market.</div>
+      <div class="tc-meta">
+        <span class="tc-pill">35+ Opportunities</span>
+        <span class="tc-pill">Skill Matching</span>
+        <span class="tc-pill">₹ Income Estimates</span>
+      </div>
+      <div class="tc-arrow" style="margin-top:16px">Open Tool →</div>
+    </a>
+
+    <a href="money-finder.html#canva" class="tool-card">
+      <span class="tc-icon">🎨</span>
+      <div class="tc-tag" style="background:#1a0a2e;border:1px solid #6d28d9;color:#c4b5fd">🎨 Generator</div>
+      <div class="tc-tag tag-new" style="margin-left:6px">✨ New</div>
+      <div class="tc-title">Canva Template Generator</div>
+      <div class="tc-desc">Type a prompt — get instant template mockups, colour palettes, font pairings, and copy suggestions. Opens directly in Canva ready to edit.</div>
+      <div class="tc-meta">
+        <span class="tc-pill">15 Platforms</span>
+        <span class="tc-pill">10 Niches</span>
+        <span class="tc-pill">3 Layout Styles</span>
+      </div>
+      <div class="tc-arrow" style="margin-top:16px">Generate Template →</div>
+    </a>
+
+    <a href="rima-ashraf.html" class="tool-card">
+      <span class="tc-icon">👤</span>
+      <div class="tc-tag tag-profile">📋 Profile</div>
+      <div class="tc-title">Rima Ashraf</div>
+      <div class="tc-desc">Senior Manager, Brand Partnerships at Rusk Media. Career timeline, education, skills, photo gallery, and full background — all in one clean page.</div>
+      <div class="tc-meta">
+        <span class="tc-pill">Rusk Media</span>
+        <span class="tc-pill">Brand Partnerships</span>
+        <span class="tc-pill">GenZ Entertainment</span>
+      </div>
+      <div class="tc-arrow" style="margin-top:16px">View Profile →</div>
+    </a>
+
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val">35+</div><div class="stat-lbl">Income Ideas</div></div>
+    <div class="stat"><div class="stat-val">15</div><div class="stat-lbl">Canva Platforms</div></div>
+    <div class="stat"><div class="stat-val">10</div><div class="stat-lbl">Design Niches</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Tools Live</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="padding-top:0">
+  <div class="section-label">Why It Works</div>
+  <h2 class="section-title">Built Different</h2>
+  <div class="features-grid">
+    <div class="feat"><div class="feat-icon">⚡</div><div class="feat-title">Instant Results</div><div class="feat-desc">No loading screens, no sign-ups. Everything runs in your browser — results appear in under a second.</div></div>
+    <div class="feat"><div class="feat-icon">🇮🇳</div><div class="feat-title">India-First</div><div class="feat-desc">Income estimates in ₹, platforms like Swiggy, Meesho, Zerodha, and Vedantu — built for the Indian context.</div></div>
+    <div class="feat"><div class="feat-icon">🎨</div><div class="feat-title">Design-Ready Output</div><div class="feat-desc">The Canva generator gives you colour palettes, fonts, and copy you can paste directly into your design.</div></div>
+    <div class="feat"><div class="feat-icon">📱</div><div class="feat-title">Works Everywhere</div><div class="feat-desc">Fully responsive — use it on your phone, tablet, or desktop. No app install required.</div></div>
+    <div class="feat"><div class="feat-icon">🔒</div><div class="feat-title">Private by Default</div><div class="feat-desc">No data is collected or stored. Everything stays in your browser — completely private.</div></div>
+    <div class="feat"><div class="feat-icon">🚀</div><div class="feat-title">Open Source</div><div class="feat-desc">All code lives on GitHub. Fork it, remix it, make it your own.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="money-finder.html">Income Finder</a>
+    <a href="rima-ashraf.html">Rima Ashraf</a>
+    <a href="https://github.com/krishh-droid/jubilant-garbanzo" target="_blank">GitHub →</a>
+  </div>
+  Built by <a href="https://github.com/krishh-droid" target="_blank">krishh-droid</a> · Deployed on GitHub Pages
+</footer>
+
+</body>
+</html>
