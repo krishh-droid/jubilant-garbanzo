@@ -125,6 +125,16 @@
   .rc-time{font-size:.75rem;color:var(--muted);margin-top:10px;padding-top:10px;
     border-top:1px solid var(--border);display:flex;align-items:center;gap:5px}
 
+  /* Live Links */
+  .rc-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .rc-link{
+    display:inline-flex;align-items:center;gap:4px;
+    background:#0a1020;border:1px solid var(--border);border-radius:6px;
+    padding:4px 10px;font-size:.74rem;color:#60a5fa;text-decoration:none;
+    transition:.15s;
+  }
+  .rc-link:hover{background:#0f1e36;border-color:var(--accent);color:#93c5fd}
+
   /* Filter bar */
   .filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
   .filter-bar span{font-size:.82rem;color:var(--muted)}
@@ -434,224 +444,283 @@ const IDEAS = [
    skills:['writing'],earn:'₹15k–80k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Write blogs, articles, and web copy for businesses. Platforms like Upwork, Fiverr, and LinkedIn help you find clients quickly.',
-   tags:['Upwork','Fiverr','Content','SEO'],cat:'Freelance'},
+   tags:['Upwork','Fiverr','Content','SEO'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/content-writing/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/articles-blog-posts'},{l:'LinkedIn Jobs',u:'https://www.linkedin.com/jobs/content-writer-jobs/'}]},
+
   {id:'copywriting',title:'Copywriting',icon:'💬',
    skills:['writing','marketing','sales'],earn:'₹20k–1.5L/mo',diff:'medium',time:8,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Write sales pages, email sequences, and ad copy. High-value skill — good copywriters earn significantly more than general writers.',
-   tags:['Sales','Email','Ads','High-value'],cat:'Freelance'},
+   tags:['Sales','Email','Ads','High-value'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/copywriting/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/sales-copywriting'},{l:'CopyHackers',u:'https://copyhackers.com/freelance-copywriter/'}]},
+
   {id:'ebook',title:'Sell eBooks / Guides',icon:'📖',
    skills:['writing','teaching'],earn:'₹5k–50k/mo',diff:'medium',time:20,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Write once, sell forever. Self-publish on Amazon KDP, Gumroad, or your own website. Niche expertise converts well.',
-   tags:['Amazon KDP','Gumroad','Passive','Writing'],cat:'Digital Products'},
+   tags:['Amazon KDP','Gumroad','Passive','Writing'],cat:'Digital Products',
+   links:[{l:'Amazon KDP',u:'https://kdp.amazon.com/'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Instamojo',u:'https://www.instamojo.com/'}]},
 
   // DESIGN
   {id:'logo-design',title:'Logo & Brand Design',icon:'🎨',
    skills:['design'],earn:'₹10k–1L/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Design logos, social media kits, and brand identities for startups. Canva, Figma, and Adobe tools are the standard stack.',
-   tags:['Fiverr','Canva','Figma','Branding'],cat:'Freelance'},
+   tags:['Fiverr','Canva','Figma','Branding'],cat:'Freelance',
+   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/graphics-design/creative-logo-design'},{l:'99designs',u:'https://99designs.com/'},{l:'DesignCrowd',u:'https://www.designcrowd.com/'}]},
+
   {id:'canva-templates',title:'Sell Canva Templates',icon:'🖼️',
    skills:['design'],earn:'₹5k–40k/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Create and sell reusable Canva templates on Etsy, Creative Market, or Gumroad. One design can sell hundreds of times.',
-   tags:['Etsy','Canva','Passive','Templates'],cat:'Digital Products'},
+   tags:['Etsy','Canva','Passive','Templates'],cat:'Digital Products',
+   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Creative Market',u:'https://creativemarket.com/sell'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Canva',u:'https://www.canva.com/'}]},
+
   {id:'ui-design',title:'UI/UX Freelance Design',icon:'📐',
    skills:['design','coding'],earn:'₹30k–2L/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Design app and web interfaces. Combine design and basic coding knowledge for premium rates on Toptal or Upwork.',
-   tags:['Figma','Toptal','Apps','High-rate'],cat:'Freelance'},
+   tags:['Figma','Toptal','Apps','High-rate'],cat:'Freelance',
+   links:[{l:'Toptal',u:'https://www.toptal.com/designers'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/ux-design/'},{l:'Dribbble Jobs',u:'https://dribbble.com/jobs'}]},
 
   // CODING
   {id:'freelance-dev',title:'Freelance Web Development',icon:'💻',
    skills:['coding'],earn:'₹25k–2L/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Build websites and apps for clients. WordPress, React, or no-code tools all pay well. Easiest entry: local businesses needing websites.',
-   tags:['Upwork','WordPress','React','Remote'],cat:'Freelance'},
+   tags:['Upwork','WordPress','React','Remote'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/web-development/'},{l:'Freelancer.in',u:'https://www.freelancer.in/jobs/website-design/'},{l:'Toptal',u:'https://www.toptal.com/developers'},{l:'PeoplePerHour',u:'https://www.peopleperhour.com/'}]},
+
   {id:'saas',title:'Build & Sell a SaaS / Tool',icon:'🛠️',
    skills:['coding'],earn:'₹50k–10L+/mo',diff:'hard',time:30,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:false,
    desc:'Build a small software product that solves a specific problem. Monthly subscriptions create passive, scalable income.',
-   tags:['Indie Hacker','Stripe','Subscriptions'],cat:'Business'},
+   tags:['Indie Hacker','Stripe','Subscriptions'],cat:'Business',
+   links:[{l:'Indie Hackers',u:'https://www.indiehackers.com/'},{l:'Product Hunt',u:'https://www.producthunt.com/'},{l:'Razorpay',u:'https://razorpay.com/'},{l:'Lemon Squeezy',u:'https://www.lemonsqueezy.com/'}]},
+
   {id:'automation',title:'No-Code Automation Services',icon:'⚙️',
    skills:['coding','admin'],earn:'₹15k–80k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Use Zapier, Make.com, or n8n to automate business workflows. Businesses pay well for saving hours of manual work.',
-   tags:['Zapier','Make.com','Automation','B2B'],cat:'Freelance'},
+   tags:['Zapier','Make.com','Automation','B2B'],cat:'Freelance',
+   links:[{l:'Zapier',u:'https://zapier.com/'},{l:'Make.com',u:'https://www.make.com/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/automation/'},{l:'n8n',u:'https://n8n.io/'}]},
 
   // VIDEO
   {id:'youtube',title:'YouTube Channel',icon:'▶️',
    skills:['video'],earn:'₹5k–5L/mo',diff:'hard',time:20,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Build an audience around your expertise. Monetise via AdSense, sponsorships, and digital products. Takes 6–12 months to ramp.',
-   tags:['AdSense','Sponsorships','Long-term'],cat:'Content'},
+   tags:['AdSense','Sponsorships','Long-term'],cat:'Content',
+   links:[{l:'YouTube Studio',u:'https://studio.youtube.com/'},{l:'Apply for Monetisation',u:'https://support.google.com/youtube/answer/72851'},{l:'TubeBuddy',u:'https://www.tubebuddy.com/'}]},
+
   {id:'video-editing',title:'Video Editing Services',icon:'🎬',
    skills:['video'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
    desc:'Edit videos for YouTubers, businesses, and social media creators. High demand — creators outsource editing constantly.',
-   tags:['DaVinci','Premiere','YouTube','Reels'],cat:'Freelance'},
+   tags:['DaVinci','Premiere','YouTube','Reels'],cat:'Freelance',
+   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/video-animation/video-editing'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/video-editing/'},{l:'DaVinci (Free)',u:'https://www.blackmagicdesign.com/products/davinciresolve'}]},
+
   {id:'shorts-ugc',title:'UGC / Short-Form Content Creator',icon:'📱',
    skills:['video','marketing'],earn:'₹10k–1L/mo',diff:'easy',time:8,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Create short videos for brands (Instagram Reels, YouTube Shorts). UGC creators are in huge demand — no followers needed.',
-   tags:['Instagram','UGC','Brand Deals','Reels'],cat:'Content'},
+   tags:['Instagram','UGC','Brand Deals','Reels'],cat:'Content',
+   links:[{l:'Billo',u:'https://www.billo.app/'},{l:'Fiverr UGC',u:'https://www.fiverr.com/categories/video-animation/ugc-video'},{l:'Instagram',u:'https://www.instagram.com/'},{l:'Collabstr',u:'https://collabstr.com/'}]},
 
   // MARKETING
   {id:'smm',title:'Social Media Management',icon:'📣',
    skills:['marketing'],earn:'₹10k–80k/mo',diff:'easy',time:8,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Manage Instagram, LinkedIn, and Twitter accounts for businesses. Low barrier to entry — most businesses need help.',
-   tags:['Instagram','LinkedIn','Clients','Retainer'],cat:'Freelance'},
+   tags:['Instagram','LinkedIn','Clients','Retainer'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/social-media-management/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/online-marketing/social-marketing'},{l:'LinkedIn',u:'https://www.linkedin.com/jobs/social-media-manager-jobs/'}]},
+
   {id:'affiliate',title:'Affiliate Marketing',icon:'🔗',
    skills:['marketing','writing'],earn:'₹5k–2L/mo',diff:'medium',time:15,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Earn commissions by promoting others\' products via blogs, YouTube, or social. Amazon Associates, ShareASale, and Impact are top networks.',
-   tags:['Amazon','ShareASale','Passive','Blog'],cat:'Digital'},
+   tags:['Amazon','ShareASale','Passive','Blog'],cat:'Digital',
+   links:[{l:'Amazon Associates',u:'https://affiliate-program.amazon.in/'},{l:'ShareASale',u:'https://www.shareasale.com/'},{l:'Impact',u:'https://impact.com/'},{l:'CJ Affiliate',u:'https://www.cj.com/'}]},
+
   {id:'email-marketing',title:'Email Marketing Consultant',icon:'📧',
    skills:['marketing','writing'],earn:'₹15k–1L/mo',diff:'medium',time:8,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Set up and run email campaigns for e-commerce brands. One of the highest-ROI channels — businesses pay premium rates.',
-   tags:['Mailchimp','Klaviyo','E-commerce','ROI'],cat:'Freelance'},
+   tags:['Mailchimp','Klaviyo','E-commerce','ROI'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/email-marketing/'},{l:'Mailchimp',u:'https://mailchimp.com/'},{l:'Klaviyo',u:'https://www.klaviyo.com/'},{l:'Brevo',u:'https://www.brevo.com/'}]},
 
   // TEACHING
   {id:'online-course',title:'Sell an Online Course',icon:'🎓',
    skills:['teaching'],earn:'₹10k–3L/mo',diff:'medium',time:30,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Package your knowledge into a course on Udemy, Teachable, or Kajabi. A good course sells indefinitely with minimal upkeep.',
-   tags:['Udemy','Teachable','Passive','Expertise'],cat:'Digital Products'},
+   tags:['Udemy','Teachable','Passive','Expertise'],cat:'Digital Products',
+   links:[{l:'Udemy',u:'https://www.udemy.com/teaching/'},{l:'Teachable',u:'https://teachable.com/'},{l:'Graphy',u:'https://graphy.com/'},{l:'Kajabi',u:'https://kajabi.com/'}]},
+
   {id:'tutoring',title:'Online Tutoring',icon:'📚',
    skills:['teaching'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Tutor students online via Vedantu, Chegg, or directly via WhatsApp/Zoom. Academics, coding, music — anything works.',
-   tags:['Vedantu','Chegg','Zoom','Students'],cat:'Services'},
+   tags:['Vedantu','Chegg','Zoom','Students'],cat:'Services',
+   links:[{l:'Vedantu',u:'https://www.vedantu.com/become-a-teacher'},{l:'UrbanPro',u:'https://www.urbanpro.com/become-tutor'},{l:'Chegg Tutors',u:'https://www.chegg.com/tutors/become-a-tutor/'},{l:'Superprof',u:'https://www.superprof.co.in/'}]},
 
   // FINANCE
   {id:'bookkeeping',title:'Freelance Bookkeeping',icon:'📊',
    skills:['finance'],earn:'₹15k–70k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Small businesses desperately need bookkeepers. Learn QuickBooks or Tally and offer monthly retainer services to local SMEs.',
-   tags:['QuickBooks','Tally','SME','Retainer'],cat:'Freelance'},
+   tags:['QuickBooks','Tally','SME','Retainer'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/bookkeeping/'},{l:'QuickBooks',u:'https://quickbooks.intuit.com/in/'},{l:'Tally',u:'https://tallysolutions.com/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/accounting-bookkeeping'}]},
+
   {id:'stock-options',title:'Options / Stock Trading',icon:'📈',
    skills:['finance'],earn:'Variable',diff:'hard',time:10,online:true,capital:'medium',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:false,
    desc:'Trade equities, F&O, or index funds. Significant learning curve and risk — treat as supplemental, not primary income.',
-   tags:['Zerodha','NIFTY','Risk','Learning'],cat:'Investment'},
+   tags:['Zerodha','NIFTY','Risk','Learning'],cat:'Investment',
+   links:[{l:'Zerodha',u:'https://zerodha.com/'},{l:'Groww',u:'https://groww.in/'},{l:'Angel One',u:'https://www.angelone.in/'},{l:'Varsity (Learn)',u:'https://zerodha.com/varsity/'}]},
 
   // PHOTOGRAPHY
   {id:'stock-photos',title:'Sell Stock Photos',icon:'📸',
    skills:['photo'],earn:'₹3k–30k/mo',diff:'easy',time:5,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Upload photos to Shutterstock, Adobe Stock, and Getty. Indian lifestyle, food, and travel content sells very well internationally.',
-   tags:['Shutterstock','Adobe Stock','Passive','Travel'],cat:'Digital Products'},
+   tags:['Shutterstock','Adobe Stock','Passive','Travel'],cat:'Digital Products',
+   links:[{l:'Shutterstock',u:'https://submit.shutterstock.com/'},{l:'Adobe Stock',u:'https://contributor.stock.adobe.com/'},{l:'Getty Images',u:'https://www.gettyimages.in/contributor'},{l:'Alamy',u:'https://www.alamy.com/contributor/'}]},
+
   {id:'event-photo',title:'Event Photography',icon:'📷',
    skills:['photo'],earn:'₹10k–50k/event',diff:'medium',time:8,online:false,capital:'medium',
    passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
    desc:'Shoot weddings, corporate events, and birthday parties. Weekend work can bring ₹15k–50k per event in metro cities.',
-   tags:['Weddings','Corporate','Weekend','Events'],cat:'Services'},
+   tags:['Weddings','Corporate','Weekend','Events'],cat:'Services',
+   links:[{l:'WedMeGood',u:'https://www.wedmegood.com/vendor/signup'},{l:'ShaadiSaga',u:'https://www.shaadisaga.com/vendors'},{l:'JustDial',u:'https://www.justdial.com/'},{l:'Instagram',u:'https://www.instagram.com/'}]},
 
   // MUSIC / AUDIO
   {id:'music-prod',title:'Music Production / Beats',icon:'🎵',
    skills:['music'],earn:'₹5k–1L/mo',diff:'medium',time:10,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Sell beats on BeatStars, license music on Epidemic Sound, or create jingles for brands. Royalties are truly passive.',
-   tags:['BeatStars','Epidemic Sound','Royalties'],cat:'Digital Products'},
+   tags:['BeatStars','Epidemic Sound','Royalties'],cat:'Digital Products',
+   links:[{l:'BeatStars',u:'https://www.beatstars.com/'},{l:'Epidemic Sound',u:'https://www.epidemicsound.com/creators/'},{l:'Pond5',u:'https://www.pond5.com/sell-music'},{l:'AudioJungle',u:'https://audiojungle.net/'}]},
+
   {id:'voiceover',title:'Voiceover Artist',icon:'🎙️',
    skills:['music','language'],earn:'₹5k–60k/mo',diff:'easy',time:5,online:true,capital:'low',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Record voiceovers for ads, audiobooks, explainer videos, and apps. India has huge demand for regional language voice talent.',
-   tags:['Voices.com','Fiverr','Regional','Audiobooks'],cat:'Freelance'},
+   tags:['Voices.com','Fiverr','Regional','Audiobooks'],cat:'Freelance',
+   links:[{l:'Voices.com',u:'https://www.voices.com/talent/register'},{l:'Fiverr',u:'https://www.fiverr.com/categories/music-audio/voice-over'},{l:'Voice123',u:'https://voice123.com/'},{l:'ACX (Audiobooks)',u:'https://www.acx.com/'}]},
 
   // DRIVING
   {id:'delivery',title:'Delivery / Logistics',icon:'🚗',
    skills:['driving'],earn:'₹15k–40k/mo',diff:'easy',time:20,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Deliver for Swiggy, Zomato, Blinkit, or Dunzo. Flexible hours, immediate payment, and no interviews required.',
-   tags:['Swiggy','Zomato','Blinkit','Gig'],cat:'Gig Economy'},
+   tags:['Swiggy','Zomato','Blinkit','Gig'],cat:'Gig Economy',
+   links:[{l:'Swiggy',u:'https://delivery.swiggy.com/'},{l:'Zomato',u:'https://www.zomato.com/rider'},{l:'Blinkit',u:'https://blinkit.com/delivery-partner'},{l:'Porter',u:'https://porter.in/driver-partner'}]},
+
   {id:'cab',title:'Cab / Ride Sharing',icon:'🚕',
    skills:['driving'],earn:'₹20k–50k/mo',diff:'easy',time:20,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Drive for Ola or Uber during peak hours. Surge pricing on weekends and evenings significantly boosts earnings.',
-   tags:['Ola','Uber','Surge','Flexible'],cat:'Gig Economy'},
+   tags:['Ola','Uber','Surge','Flexible'],cat:'Gig Economy',
+   links:[{l:'Ola',u:'https://www.olacabs.com/driver-partner'},{l:'Uber',u:'https://www.uber.com/in/en/drive/'},{l:'Rapido',u:'https://www.rapido.bike/captain'}]},
 
   // COOKING
   {id:'cloud-kitchen',title:'Cloud / Home Kitchen',icon:'🍳',
    skills:['cooking'],earn:'₹15k–1L/mo',diff:'medium',time:15,online:false,capital:'low',
    passive:false,fast:false,scalable:true,flexible:false,creative:true,lowrisk:false,
    desc:'Register as a home chef on Zomato or Swiggy. Office tiffin services and meal preps have strong repeat demand.',
-   tags:['Zomato','Swiggy','Tiffin','Food'],cat:'Business'},
+   tags:['Zomato','Swiggy','Tiffin','Food'],cat:'Business',
+   links:[{l:'Zomato Partner',u:'https://www.zomato.com/partner'},{l:'Swiggy Partner',u:'https://partner.swiggy.com/'},{l:'EatSure',u:'https://eatsure.com/'},{l:'FSSAI (Licence)',u:'https://foscos.fssai.gov.in/'}]},
+
   {id:'baking',title:'Home Baking Business',icon:'🎂',
    skills:['cooking','craft'],earn:'₹5k–40k/mo',diff:'easy',time:10,online:false,capital:'low',
    passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
    desc:'Sell custom cakes, cookies, and baked goods. Instagram and WhatsApp groups are the most effective sales channels.',
-   tags:['Instagram','Custom Cakes','Events','Local'],cat:'Business'},
+   tags:['Instagram','Custom Cakes','Events','Local'],cat:'Business',
+   links:[{l:'Instagram',u:'https://www.instagram.com/'},{l:'Instamojo',u:'https://www.instamojo.com/'},{l:'FSSAI (Licence)',u:'https://foscos.fssai.gov.in/'},{l:'WhatsApp Business',u:'https://business.whatsapp.com/'}]},
 
   // PETS
   {id:'pet-sitting',title:'Pet Sitting / Dog Walking',icon:'🐾',
    skills:['pets'],earn:'₹5k–25k/mo',diff:'easy',time:5,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Offer pet sitting and dog walking via Supertails, local Facebook groups, or word of mouth in your society.',
-   tags:['Supertails','Local','Dogs','Weekend'],cat:'Services'},
+   tags:['Supertails','Local','Dogs','Weekend'],cat:'Services',
+   links:[{l:'Supertails',u:'https://supertails.com/'},{l:'DogStays',u:'https://www.dogstays.in/'},{l:'PetBacker',u:'https://www.petbacker.in/'},{l:'Wagr',u:'https://www.wagr.in/'}]},
 
   // CRAFT
   {id:'etsy',title:'Sell Handmade on Etsy / Meesho',icon:'🧵',
    skills:['craft'],earn:'₹5k–50k/mo',diff:'medium',time:15,online:true,capital:'low',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Sell handmade jewellery, art prints, candles, or décor on Etsy or Meesho. Unique Indian crafts do especially well internationally.',
-   tags:['Etsy','Meesho','Handmade','Export'],cat:'Business'},
+   tags:['Etsy','Meesho','Handmade','Export'],cat:'Business',
+   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Meesho',u:'https://supplier.meesho.com/'},{l:'Amazon Handmade',u:'https://sell.amazon.in/programs/amazon-handmade'},{l:'Craftsvilla',u:'https://www.craftsvilla.com/'}]},
+
   {id:'print-on-demand',title:'Print-on-Demand Store',icon:'👕',
    skills:['design','craft'],earn:'₹3k–40k/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
    desc:'Upload your designs to Redbubble, Merch by Amazon, or Printful. Products print and ship automatically — no inventory needed.',
-   tags:['Redbubble','Amazon Merch','Passive','No inventory'],cat:'Digital Products'},
+   tags:['Redbubble','Amazon Merch','Passive','No inventory'],cat:'Digital Products',
+   links:[{l:'Redbubble',u:'https://www.redbubble.com/sell/overview'},{l:'Merch by Amazon',u:'https://merch.amazon.com/'},{l:'Printful',u:'https://www.printful.com/'},{l:'Printify',u:'https://printify.com/'}]},
 
   // LANGUAGE
   {id:'translation',title:'Translation / Localisation',icon:'🌐',
    skills:['language','writing'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Translate documents, apps, and websites for global businesses. South Asian language pairs (Hindi, Tamil, Bengali) are in high demand.',
-   tags:['ProZ','Upwork','Hindi','Tamil'],cat:'Freelance'},
+   tags:['ProZ','Upwork','Hindi','Tamil'],cat:'Freelance',
+   links:[{l:'ProZ',u:'https://www.proz.com/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/translation/'},{l:'Gengo',u:'https://gengo.com/translators/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/translation'}]},
 
   // FITNESS
   {id:'pt',title:'Online Personal Trainer',icon:'💪',
    skills:['fitness'],earn:'₹10k–80k/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
    desc:'Coach clients via Zoom, WhatsApp, or a fitness app. Sell monthly transformation packages rather than per-session rates.',
-   tags:['Zoom','Instagram','Transformation','Health'],cat:'Services'},
+   tags:['Zoom','Instagram','Transformation','Health'],cat:'Services',
+   links:[{l:'Classplus',u:'https://classplusapp.com/'},{l:'Cult.fit Partner',u:'https://www.cult.fit/teach-at-cult'},{l:'Trainerize',u:'https://www.trainerize.com/'},{l:'Instagram',u:'https://www.instagram.com/'}]},
 
   // RESEARCH / ADMIN
   {id:'va',title:'Virtual Assistant',icon:'🗂️',
    skills:['admin'],earn:'₹10k–50k/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Handle emails, scheduling, data entry, and research for busy entrepreneurs. Recurring retainers are the norm.',
-   tags:['VA','Remote','Entrepreneurs','Retainer'],cat:'Freelance'},
+   tags:['VA','Remote','Entrepreneurs','Retainer'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/virtual-assistant/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/virtual-assistant'},{l:'Wishup',u:'https://www.wishup.co/'},{l:'Fancy Hands',u:'https://www.fancyhands.com/'}]},
+
   {id:'research',title:'Market Research / Surveys',icon:'🔍',
    skills:['research','admin'],earn:'₹2k–15k/mo',diff:'easy',time:3,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Participate in paid surveys, usability tests, and focus groups. Not a full income but easy extra cash with zero skills needed.',
-   tags:['UserTesting','Toluna','Surveys','Easy'],cat:'Gig Economy'},
+   tags:['UserTesting','Toluna','Surveys','Easy'],cat:'Gig Economy',
+   links:[{l:'UserTesting',u:'https://www.usertesting.com/be-a-user-tester'},{l:'Toluna',u:'https://in.toluna.com/'},{l:'Swagbucks',u:'https://www.swagbucks.com/'},{l:'Respondent.io',u:'https://app.respondent.io/respondents'}]},
 
   // UNIVERSAL
   {id:'dropshipping',title:'Dropshipping Store',icon:'📦',
    skills:[],earn:'₹10k–2L/mo',diff:'hard',time:20,online:true,capital:'low',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:false,
    desc:'Sell products online without holding inventory. Supplier ships directly to customer. Requires strong marketing skills to succeed.',
-   tags:['Shopify','AliExpress','Marketing','eCommerce'],cat:'Business'},
+   tags:['Shopify','AliExpress','Marketing','eCommerce'],cat:'Business',
+   links:[{l:'Shopify',u:'https://www.shopify.com/in'},{l:'AliExpress',u:'https://www.aliexpress.com/'},{l:'IndiaMart',u:'https://www.indiamart.com/'},{l:'DSers',u:'https://www.dsers.com/'}]},
+
   {id:'reselling',title:'Reselling (Meesho / OLX)',icon:'🛒',
    skills:[],earn:'₹5k–30k/mo',diff:'easy',time:8,online:true,capital:'low',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Buy low and sell high on OLX, Facebook Marketplace, or Meesho. Clothes, electronics, and furniture flip fastest.',
-   tags:['OLX','Meesho','Resell','No skill'],cat:'Business'},
+   tags:['OLX','Meesho','Resell','No skill'],cat:'Business',
+   links:[{l:'OLX',u:'https://www.olx.in/'},{l:'Meesho',u:'https://supplier.meesho.com/'},{l:'Facebook Marketplace',u:'https://www.facebook.com/marketplace/'},{l:'Quikr',u:'https://www.quikr.com/'}]},
+
   {id:'domain-flipping',title:'Domain / Website Flipping',icon:'🌍',
    skills:['research'],earn:'₹5k–5L/sale',diff:'medium',time:5,online:true,capital:'low',
    passive:true,fast:false,scalable:false,flexible:true,creative:false,lowrisk:false,
    desc:'Buy undervalued domain names or websites and sell them for profit. Flippa is the main marketplace. Requires patience.',
-   tags:['Flippa','Domains','Investment','Patience'],cat:'Investment'},
+   tags:['Flippa','Domains','Investment','Patience'],cat:'Investment',
+   links:[{l:'Flippa',u:'https://flippa.com/'},{l:'GoDaddy Auctions',u:'https://auctions.godaddy.com/'},{l:'Sedo',u:'https://sedo.com/'},{l:'Motion Invest',u:'https://motioninvest.com/'}]},
+
   {id:'task-apps',title:'Task & Gig Apps',icon:'📋',
    skills:[],earn:'₹5k–20k/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
    desc:'Complete micro-tasks on Urban Company, TaskRabbit (India), or Amazon Mechanical Turk. Good filler income.',
-   tags:['Urban Company','Gig','Micro-tasks','Flexible'],cat:'Gig Economy'},
+   tags:['Urban Company','Gig','Micro-tasks','Flexible'],cat:'Gig Economy',
+   links:[{l:'Urban Company',u:'https://www.urbancompany.com/become-a-professional'},{l:'Amazon MTurk',u:'https://www.mturk.com/'},{l:'Taskmo',u:'https://taskmo.com/'},{l:'Gigtel',u:'https://gigtel.in/'}]},
 ];
 
 // ─── STATE ──────────────────────────────────────────────────────────────────
@@ -1222,6 +1291,7 @@ function renderCards(cards,cat){
       <div class="rc-time">
         ⏱️ Needs ~${idea.time}h/week &nbsp;·&nbsp; ${idea.online?'💻 Online':'🏘️ Local'} &nbsp;·&nbsp; ${idea.passive?'😴 Can be passive':'⚡ Active'}
       </div>
+      ${idea.links ? `<div class="rc-links">${idea.links.map(lk=>`<a class="rc-link" href="${lk.u}" target="_blank" rel="noopener">↗ ${lk.l}</a>`).join('')}</div>` : ''}
     </div>`;
   }).join('');
 }
