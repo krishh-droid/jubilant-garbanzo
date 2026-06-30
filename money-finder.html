@@ -3,95 +3,76 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Side Income Finder — KrishTools</title>
+<title>Money Idea Finder — KrishTools</title>
+<meta name="description" content="Find the best ways to make money online — personalised to your skills, time, and goals."/>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --bg:#0b0f1a;--surface:#111827;--card:#1a2235;--border:#1e2d45;
-    --accent:#3b82f6;--accent2:#06b6d4;--green:#10b981;--yellow:#f59e0b;
-    --red:#ef4444;--purple:#8b5cf6;--text:#e2e8f0;--muted:#64748b;
-    --tag:#0f172a;
+    --bg:#0b0f1a;--surface:#111827;--card:#141e2e;--border:#1e2d45;
+    --accent:#3b82f6;--accent2:#06b6d4;--green:#10b981;--text:#e2e8f0;--muted:#64748b;--tag:#0a1020;
   }
   body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
 
-  /* Shared Nav */
-  .site-nav{
-    position:fixed;top:0;left:0;right:0;z-index:200;
-    background:rgba(11,15,26,.88);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-    padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;
-  }
-  .nav-logo{font-size:1rem;font-weight:800;
-    background:linear-gradient(90deg,#fff,#93c5fd);-webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+  /* NAV */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(11,15,26,.9);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+    padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-size:1rem;font-weight:800;background:linear-gradient(90deg,#fff,#93c5fd);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
   .nav-links{display:flex;gap:5px}
   .nav-lnk{padding:6px 12px;border-radius:7px;font-size:.8rem;color:var(--muted);
     text-decoration:none;transition:.15s;border:1px solid transparent}
-  .nav-lnk:hover{color:var(--text);background:#111827;border-color:var(--border)}
+  .nav-lnk:hover{color:var(--text);background:var(--surface);border-color:var(--border)}
   .nav-lnk.cur{color:#93c5fd;background:#0f1e36;border-color:var(--accent)}
 
-  /* Header */
-  header{
-    background:linear-gradient(135deg,#0d1b2e 0%,#0b1628 100%);
-    border-bottom:1px solid var(--border);
-    padding:96px 24px 32px;text-align:center;position:relative;overflow:hidden;
-  }
-  header::before{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(59,130,246,.15) 0%,transparent 70%);
-    pointer-events:none;
-  }
-  header h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.5px;
+  /* HEADER */
+  header{background:linear-gradient(135deg,#0d1b2e,#0b1628);border-bottom:1px solid var(--border);
+    padding:96px 24px 36px;text-align:center;position:relative;overflow:hidden}
+  header::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(59,130,246,.15),transparent 70%)}
+  header h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.5px;
     background:linear-gradient(90deg,#fff 40%,#93c5fd);-webkit-background-clip:text;
     -webkit-text-fill-color:transparent;background-clip:text}
   header p{color:var(--muted);margin-top:8px;font-size:.95rem}
 
-  /* Layout */
+  /* LAYOUT */
   .wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
 
-  /* Steps */
+  /* STEPS */
   .steps{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
-  .step{flex:1;min-width:100px;background:var(--surface);border:1px solid var(--border);
-    border-radius:10px;padding:10px 14px;text-align:center;font-size:.78rem;color:var(--muted);
-    transition:.2s}
+  .step{flex:1;min-width:90px;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:10px 14px;text-align:center;font-size:.78rem;color:var(--muted);transition:.2s}
   .step.active{border-color:var(--accent);color:var(--accent);background:#0f1e36}
   .step.done{border-color:var(--green);color:var(--green)}
   .step span{display:block;font-size:1.1rem;margin-bottom:2px}
 
-  /* Panel */
+  /* PANEL */
   .panel{display:none}.panel.active{display:block}
 
-  /* Card */
+  /* CARD */
   .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 30px;margin-bottom:20px}
-  .card h2{font-size:1.1rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-  .card h2 .icon{width:34px;height:34px;border-radius:9px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
+  .card h2{font-size:1.05rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .card h2 .icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));
     display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 
-  /* Question group */
+  /* CHIPS */
   .q-label{font-size:.85rem;color:var(--muted);margin-bottom:10px;font-weight:500}
   .q-group{margin-bottom:22px}
-
-  /* Chip select */
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{
-    background:var(--tag);border:1px solid var(--border);border-radius:8px;
-    padding:7px 14px;font-size:.82rem;cursor:pointer;color:#94a3b8;
-    transition:.15s;user-select:none;
-  }
+  .chip{background:var(--tag);border:1px solid var(--border);border-radius:8px;
+    padding:7px 14px;font-size:.82rem;cursor:pointer;color:#94a3b8;transition:.15s;user-select:none}
   .chip:hover{border-color:#3b6fd4;color:var(--text)}
   .chip.sel{background:#1d3461;border-color:var(--accent);color:#93c5fd}
 
-  /* Slider */
+  /* SLIDER */
   .slider-row{display:flex;align-items:center;gap:14px}
-  input[type=range]{flex:1;-webkit-appearance:none;height:6px;border-radius:4px;
-    background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--pct,50%),var(--border) var(--pct,50%),var(--border) 100%);
-    outline:none;cursor:pointer}
+  input[type=range]{flex:1;-webkit-appearance:none;height:6px;border-radius:4px;outline:none;cursor:pointer;
+    background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--pct,25%),var(--border) var(--pct,25%),var(--border) 100%)}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;
     border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px #1d3461}
-  .slider-val{font-size:.95rem;font-weight:700;color:var(--accent);width:60px;text-align:right}
+  .slider-val{font-size:.95rem;font-weight:700;color:var(--accent);width:70px;text-align:right}
 
-  /* Buttons */
+  /* BUTTONS */
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:10px;
     font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:.15s}
   .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
@@ -101,41 +82,15 @@
   .btn-row{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
   .btn-big{padding:14px 32px;font-size:1rem;border-radius:12px}
 
-  /* Results */
-  #results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-  .result-card{
-    background:var(--card);border:1px solid var(--border);border-radius:14px;
-    padding:20px 22px;transition:.2s;cursor:default;
-  }
-  .result-card:hover{border-color:#2a4a7f;transform:translateY(-2px)}
-  .rc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-  .rc-icon{font-size:28px}
-  .rc-badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
-  .badge{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:6px}
-  .badge-earn{background:#0d2a1e;color:#34d399;border:1px solid #065f46}
-  .badge-diff{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:6px}
-  .diff-easy{background:#0c2a1a;color:#4ade80;border:1px solid #166534}
-  .diff-medium{background:#2a1f05;color:#fbbf24;border:1px solid #92400e}
-  .diff-hard{background:#2a0c0c;color:#f87171;border:1px solid #991b1b}
-  .rc-title{font-size:.97rem;font-weight:700;margin-bottom:6px}
-  .rc-desc{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:12px}
-  .rc-tags{display:flex;flex-wrap:wrap;gap:5px}
-  .rc-tag{font-size:.72rem;background:var(--tag);border:1px solid var(--border);
-    border-radius:5px;padding:2px 8px;color:#64748b}
-  .rc-time{font-size:.75rem;color:var(--muted);margin-top:10px;padding-top:10px;
-    border-top:1px solid var(--border);display:flex;align-items:center;gap:5px}
+  /* SUMMARY */
+  .summary{background:linear-gradient(135deg,#0d1e36,#0b1a30);border:1px solid var(--border);
+    border-radius:14px;padding:18px 24px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  .sum-stat{text-align:center}
+  .sum-val{font-size:1.4rem;font-weight:800;color:var(--accent)}
+  .sum-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
+  .sum-div{width:1px;background:var(--border);height:36px}
 
-  /* Live Links */
-  .rc-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .rc-link{
-    display:inline-flex;align-items:center;gap:4px;
-    background:#0a1020;border:1px solid var(--border);border-radius:6px;
-    padding:4px 10px;font-size:.74rem;color:#60a5fa;text-decoration:none;
-    transition:.15s;
-  }
-  .rc-link:hover{background:#0f1e36;border-color:var(--accent);color:#93c5fd}
-
-  /* Filter bar */
+  /* FILTER */
   .filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
   .filter-bar span{font-size:.82rem;color:var(--muted)}
   .f-chip{background:var(--tag);border:1px solid var(--border);border-radius:20px;
@@ -143,120 +98,37 @@
   .f-chip:hover{color:var(--text)}
   .f-chip.active{background:#1d3461;border-color:var(--accent);color:#93c5fd}
 
-  /* Summary bar */
-  .summary{background:linear-gradient(135deg,#0d1e36,#0b1a30);border:1px solid var(--border);
-    border-radius:14px;padding:18px 24px;margin-bottom:24px;
-    display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-  .sum-stat{text-align:center}
-  .sum-val{font-size:1.4rem;font-weight:800;color:var(--accent)}
-  .sum-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
-  .sum-div{width:1px;background:var(--border);height:36px}
+  /* RESULT CARDS */
+  #results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+  .result-card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:20px 22px;transition:.2s}
+  .result-card:hover{border-color:#2a4a7f;transform:translateY(-2px)}
+  .rc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+  .rc-icon{font-size:28px}
+  .rc-badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  .badge-earn{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:6px;
+    background:#0d2a1e;color:#34d399;border:1px solid #065f46}
+  .badge-diff{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:6px}
+  .diff-easy{background:#0c2a1a;color:#4ade80;border:1px solid #166534}
+  .diff-medium{background:#2a1f05;color:#fbbf24;border:1px solid #92400e}
+  .diff-hard{background:#2a0c0c;color:#f87171;border:1px solid #991b1b}
+  .rc-title{font-size:.97rem;font-weight:700;margin-bottom:6px}
+  .rc-desc{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:10px}
+  .rc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+  .rc-tag{font-size:.72rem;background:var(--tag);border:1px solid var(--border);
+    border-radius:5px;padding:2px 8px;color:#64748b}
+  .rc-time{font-size:.75rem;color:var(--muted);padding-top:10px;
+    border-top:1px solid var(--border);display:flex;align-items:center;gap:5px;margin-bottom:10px}
+  .rc-links{display:flex;flex-wrap:wrap;gap:6px}
+  .rc-link{display:inline-flex;align-items:center;gap:4px;background:#07101e;
+    border:1px solid var(--border);border-radius:6px;padding:4px 10px;
+    font-size:.74rem;color:#60a5fa;text-decoration:none;transition:.15s}
+  .rc-link:hover{background:#0f1e36;border-color:var(--accent);color:#93c5fd}
 
-  /* Empty */
+  /* EMPTY / RESTART */
   .empty{text-align:center;padding:60px 20px;color:var(--muted)}
   .empty span{font-size:3rem;display:block;margin-bottom:12px}
-
-  /* Restart */
   #restart-btn{margin-bottom:24px}
-
-  /* ── Canva Generator ── */
-  .canva-banner{
-    background:linear-gradient(135deg,#1a0a2e,#0d1a35);
-    border:1px solid #6d28d9;border-radius:14px;padding:20px 24px;
-    margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;
-    flex-wrap:wrap;gap:12px;
-  }
-  .canva-banner p{font-size:.9rem;color:#c4b5fd}
-  .canva-banner strong{color:#fff;display:block;font-size:1rem;margin-bottom:3px}
-
-  .prompt-wrap{position:relative;margin-bottom:16px}
-  .prompt-wrap textarea{
-    width:100%;background:#0d1625;border:1px solid var(--border);border-radius:12px;
-    color:var(--text);font-size:.95rem;padding:16px 50px 16px 18px;resize:vertical;
-    min-height:80px;font-family:inherit;outline:none;transition:.2s;line-height:1.5;
-  }
-  .prompt-wrap textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(139,92,246,.15)}
-  .prompt-wrap textarea::placeholder{color:var(--muted)}
-  .gen-btn{
-    background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border:none;
-    border-radius:10px;padding:13px 28px;font-size:.95rem;font-weight:700;
-    cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:8px;
-  }
-  .gen-btn:hover{opacity:.9;transform:translateY(-1px)}
-  .gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-
-  /* Example prompts */
-  .eg-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
-  .eg-chip{background:#0f1625;border:1px solid #1e2d45;border-radius:20px;
-    padding:5px 13px;font-size:.77rem;color:#64748b;cursor:pointer;transition:.15s}
-  .eg-chip:hover{border-color:#7c3aed;color:#c4b5fd}
-
-  /* Output */
-  #canva-output{display:none}
-  #canva-output.show{display:block}
-
-  .tpl-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-  .tpl-tab{background:var(--tag);border:1px solid var(--border);border-radius:8px;
-    padding:7px 16px;font-size:.82rem;cursor:pointer;color:var(--muted);transition:.15s}
-  .tpl-tab:hover{color:var(--text)}
-  .tpl-tab.active{background:#1e1040;border-color:#7c3aed;color:#c4b5fd}
-
-  .tpl-panel{display:none}.tpl-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media(max-width:640px){.tpl-panel.active{grid-template-columns:1fr}}
-
-  /* Mockup canvas */
-  .mockup-wrap{display:flex;flex-direction:column;gap:12px}
-  .mockup{
-    border-radius:12px;overflow:hidden;position:relative;
-    border:1px solid var(--border);flex-shrink:0;
-  }
-  .mockup-label{font-size:.72rem;color:var(--muted);text-align:center;margin-top:6px}
-
-  /* Right panel */
-  .tpl-details{display:flex;flex-direction:column;gap:14px}
-  .detail-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-  .detail-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px;font-weight:600}
-
-  .palette{display:flex;gap:6px;flex-wrap:wrap}
-  .swatch{width:36px;height:36px;border-radius:7px;cursor:pointer;position:relative;
-    transition:.15s;flex-shrink:0}
-  .swatch:hover{transform:scale(1.1)}
-  .swatch-name{font-size:.7rem;color:var(--muted);margin-top:4px;text-align:center}
-
-  .font-pair{display:flex;flex-direction:column;gap:6px}
-  .font-heading{font-size:1.4rem;font-weight:800;line-height:1.1}
-  .font-body{font-size:.85rem;color:var(--muted);line-height:1.4}
-  .font-tag{font-size:.72rem;background:var(--tag);border:1px solid var(--border);
-    border-radius:5px;padding:2px 8px;color:#64748b;display:inline-block;margin-top:4px}
-
-  .copy-list{display:flex;flex-direction:column;gap:8px}
-  .copy-item{background:var(--tag);border-radius:8px;padding:10px 12px;
-    font-size:.82rem;color:#94a3b8;line-height:1.4;cursor:pointer;
-    border:1px solid transparent;transition:.15s}
-  .copy-item:hover{border-color:#7c3aed;color:var(--text)}
-  .copy-item strong{display:block;font-size:.72rem;color:#7c3aed;margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
-
-  .canva-cta{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-    background:linear-gradient(135deg,#1a0a2e,#0d1a35);
-    border:1px solid #6d28d9;border-radius:10px;padding:14px 18px;flex-wrap:wrap;
-  }
-  .canva-cta p{font-size:.82rem;color:#c4b5fd}
-  .open-canva{
-    background:#7c3aed;color:#fff;border:none;border-radius:8px;
-    padding:9px 18px;font-size:.85rem;font-weight:700;cursor:pointer;
-    text-decoration:none;display:inline-block;transition:.15s;white-space:nowrap;
-  }
-  .open-canva:hover{background:#6d28d9}
-
-  .dim-badge{display:inline-flex;align-items:center;gap:6px;background:#1a0a2e;
-    border:1px solid #6d28d9;border-radius:6px;padding:4px 10px;
-    font-size:.78rem;color:#c4b5fd;font-weight:600;margin-bottom:10px}
-
-  /* Spinner */
-  .spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);
-    border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -265,30 +137,28 @@
   <a href="index.html" class="nav-logo">KrishTools</a>
   <div class="nav-links">
     <a href="index.html" class="nav-lnk">Home</a>
-    <a href="money-finder.html" class="nav-lnk cur">💰 Income Finder</a>
+    <a href="money-finder.html" class="nav-lnk cur">💰 Money Finder</a>
   </div>
 </nav>
 
 <header>
-  <h1>💰 Side Income Finder</h1>
-  <p>Answer a few questions — get personalised ways to earn more money</p>
+  <h1>💰 Money Idea Finder</h1>
+  <p>Answer 3 quick questions — get personalised ways to earn money online, worldwide</p>
 </header>
 
 <div class="wrap">
 
-  <!-- Step indicators -->
   <div class="steps">
     <div class="step active" id="s1"><span>①</span>Skills</div>
     <div class="step" id="s2"><span>②</span>Time</div>
     <div class="step" id="s3"><span>③</span>Goals</div>
     <div class="step" id="s4"><span>④</span>Results</div>
-    <div class="step" id="s5" style="cursor:pointer" onclick="go(5)"><span>🎨</span>Canva</div>
   </div>
 
-  <!-- PANEL 1: Skills & Interests -->
+  <!-- PANEL 1 -->
   <div class="panel active" id="p1">
     <div class="card">
-      <h2><div class="icon">🧠</div> What are your skills or interests?</h2>
+      <h2><div class="icon">🧠</div>What are your skills or interests?</h2>
       <div class="q-group">
         <div class="q-label">Select all that apply</div>
         <div class="chips" id="skill-chips">
@@ -296,18 +166,18 @@
           <div class="chip" data-v="design">🎨 Design</div>
           <div class="chip" data-v="coding">💻 Coding</div>
           <div class="chip" data-v="video">🎬 Video / Editing</div>
-          <div class="chip" data-v="marketing">📣 Marketing / Social Media</div>
-          <div class="chip" data-v="teaching">🎓 Teaching / Tutoring</div>
-          <div class="chip" data-v="sales">🤝 Sales / Persuasion</div>
-          <div class="chip" data-v="finance">📊 Finance / Excel</div>
+          <div class="chip" data-v="marketing">📣 Marketing</div>
+          <div class="chip" data-v="teaching">🎓 Teaching</div>
+          <div class="chip" data-v="sales">🤝 Sales</div>
+          <div class="chip" data-v="finance">📊 Finance</div>
           <div class="chip" data-v="music">🎵 Music / Audio</div>
           <div class="chip" data-v="photo">📸 Photography</div>
-          <div class="chip" data-v="craft">🧵 Crafts / Handmade</div>
+          <div class="chip" data-v="craft">🧵 Crafts / Art</div>
           <div class="chip" data-v="driving">🚗 Driving</div>
-          <div class="chip" data-v="cooking">🍳 Cooking / Baking</div>
-          <div class="chip" data-v="fitness">💪 Fitness / Coaching</div>
+          <div class="chip" data-v="cooking">🍳 Cooking</div>
+          <div class="chip" data-v="fitness">💪 Fitness</div>
           <div class="chip" data-v="language">🌐 Languages</div>
-          <div class="chip" data-v="pets">🐾 Animals / Pets</div>
+          <div class="chip" data-v="pets">🐾 Pets / Animals</div>
           <div class="chip" data-v="research">🔍 Research</div>
           <div class="chip" data-v="admin">🗂️ Admin / Organisation</div>
         </div>
@@ -318,10 +188,10 @@
     </div>
   </div>
 
-  <!-- PANEL 2: Time & Setup -->
+  <!-- PANEL 2 -->
   <div class="panel" id="p2">
     <div class="card">
-      <h2><div class="icon">⏱️</div> How much time can you spare per week?</h2>
+      <h2><div class="icon">⏱️</div>How many hours can you spare per week?</h2>
       <div class="q-group">
         <div class="slider-row">
           <input type="range" id="time-slider" min="1" max="40" value="10" oninput="updateSlider(this,'time-val','hrs/week')"/>
@@ -329,17 +199,17 @@
         </div>
       </div>
 
-      <h2 style="margin-top:22px"><div class="icon">💵</div> Do you have startup capital?</h2>
+      <h2 style="margin-top:22px"><div class="icon">💵</div>Do you have startup capital?</h2>
       <div class="q-group">
         <div class="chips" id="capital-chips">
-          <div class="chip sel" data-v="none">₹0 — Zero budget</div>
-          <div class="chip" data-v="low">₹1k–10k</div>
-          <div class="chip" data-v="medium">₹10k–50k</div>
-          <div class="chip" data-v="high">₹50k+</div>
+          <div class="chip sel" data-v="none">$0 — Zero budget</div>
+          <div class="chip" data-v="low">Up to $100</div>
+          <div class="chip" data-v="medium">$100–$1,000</div>
+          <div class="chip" data-v="high">$1,000+</div>
         </div>
       </div>
 
-      <h2 style="margin-top:22px"><div class="icon">📱</div> Preferred work style?</h2>
+      <h2 style="margin-top:22px"><div class="icon">🌍</div>Preferred work style?</h2>
       <div class="q-group">
         <div class="chips" id="style-chips">
           <div class="chip" data-v="online">💻 Online / Remote</div>
@@ -354,25 +224,25 @@
     </div>
   </div>
 
-  <!-- PANEL 3: Goals -->
+  <!-- PANEL 3 -->
   <div class="panel" id="p3">
     <div class="card">
-      <h2><div class="icon">🎯</div> What's your income goal per month?</h2>
+      <h2><div class="icon">🎯</div>What's your monthly income goal?</h2>
       <div class="q-group">
         <div class="chips" id="goal-chips">
-          <div class="chip" data-v="5k">₹5,000 — A little extra</div>
-          <div class="chip" data-v="20k">₹20,000 — Side hustle</div>
-          <div class="chip" data-v="50k">₹50,000 — Serious income</div>
-          <div class="chip" data-v="100k">₹1 Lakh+ — Replace salary</div>
+          <div class="chip" data-v="low">$200 — A little extra</div>
+          <div class="chip" data-v="mid">$500 — Side hustle</div>
+          <div class="chip" data-v="high">$1,500 — Serious income</div>
+          <div class="chip" data-v="full">$3,000+ — Full income</div>
         </div>
       </div>
 
-      <h2 style="margin-top:22px"><div class="icon">🌱</div> What matters most to you?</h2>
+      <h2 style="margin-top:22px"><div class="icon">🌱</div>What matters most to you?</h2>
       <div class="q-group">
         <div class="chips" id="pref-chips">
           <div class="chip" data-v="fast">⚡ Fast to start</div>
-          <div class="chip" data-v="passive">😴 Passive / Automated</div>
-          <div class="chip" data-v="scalable">📈 Scalable long-term</div>
+          <div class="chip" data-v="passive">😴 Passive income</div>
+          <div class="chip" data-v="scalable">📈 Scalable</div>
           <div class="chip" data-v="flexible">🕐 Flexible hours</div>
           <div class="chip" data-v="creative">🎨 Creative work</div>
           <div class="chip" data-v="lowrisk">🛡️ Low risk</div>
@@ -388,374 +258,322 @@
   <!-- PANEL 4: Results -->
   <div class="panel" id="p4">
     <button class="btn btn-outline" id="restart-btn" onclick="restart()">← Start Over</button>
-    <div class="canva-banner">
-      <div>
-        <strong>🎨 Canva Template Generator</strong>
-        <p>Turn any idea into a ready-to-edit Canva template in seconds</p>
-      </div>
-      <button class="gen-btn" onclick="go(5)">Open Template Generator →</button>
-    </div>
     <div class="summary" id="summary-bar"></div>
     <div class="filter-bar" id="filter-bar"></div>
     <div id="results-grid"></div>
   </div>
 
-  <!-- PANEL 5: Canva Template Generator -->
-  <div class="panel" id="p5">
-    <button class="btn btn-outline" style="margin-bottom:20px" onclick="go(4)">← Back to Results</button>
-
-    <div class="card">
-      <h2><div class="icon" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">🎨</div> Canva Template Generator</h2>
-
-      <div class="q-label" style="margin-bottom:10px">Describe what you want to create</div>
-      <div class="prompt-wrap">
-        <textarea id="tpl-prompt" placeholder="e.g. Instagram post for a coffee shop with warm vibes&#10;YouTube thumbnail for a finance tips video&#10;LinkedIn banner for a marketing consultant&#10;Pinterest pin for healthy meal prep ideas"></textarea>
-      </div>
-
-      <div class="q-label">Try an example:</div>
-      <div class="eg-row" id="eg-row">
-        <span class="eg-chip" onclick="useEg(this)">☕ Instagram post for a coffee shop</span>
-        <span class="eg-chip" onclick="useEg(this)">💪 YouTube thumbnail for a fitness video</span>
-        <span class="eg-chip" onclick="useEg(this)">📊 LinkedIn post for a business coach</span>
-        <span class="eg-chip" onclick="useEg(this)">🌍 Pinterest pin for travel photography</span>
-        <span class="eg-chip" onclick="useEg(this)">🎓 Online course promo flyer</span>
-        <span class="eg-chip" onclick="useEg(this)">💅 Instagram story for a beauty brand</span>
-        <span class="eg-chip" onclick="useEg(this)">🍕 Facebook ad for a restaurant</span>
-        <span class="eg-chip" onclick="useEg(this)">🏠 Real estate listing post</span>
-      </div>
-
-      <button class="gen-btn" id="gen-btn" onclick="generateTemplate()">✨ Generate Templates</button>
-    </div>
-
-    <!-- OUTPUT -->
-    <div id="canva-output">
-      <div class="tpl-tabs" id="tpl-tabs"></div>
-      <div id="tpl-panels"></div>
-    </div>
-  </div>
-
 </div>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────────────────────────
 const IDEAS = [
   // WRITING
   {id:'freelance-writing',title:'Freelance Content Writing',icon:'✍️',
-   skills:['writing'],earn:'₹15k–80k/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['writing'],earn:'$500–$5,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Write blogs, articles, and web copy for businesses. Platforms like Upwork, Fiverr, and LinkedIn help you find clients quickly.',
-   tags:['Upwork','Fiverr','Content','SEO'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/content-writing/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/articles-blog-posts'},{l:'LinkedIn Jobs',u:'https://www.linkedin.com/jobs/content-writer-jobs/'}]},
+   desc:'Write blog posts, articles, and web copy for businesses worldwide. Upwork and Fiverr have thousands of active writing jobs at any time.',
+   tags:['Upwork','Fiverr','SEO','Blogging'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/content-writing/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/articles-blog-posts'},{l:'ProBlogger Jobs',u:'https://problogger.com/jobs/'},{l:'Contently',u:'https://contently.com/'}]},
 
   {id:'copywriting',title:'Copywriting',icon:'💬',
-   skills:['writing','marketing','sales'],earn:'₹20k–1.5L/mo',diff:'medium',time:8,online:true,capital:'none',
+   skills:['writing','marketing','sales'],earn:'$1,000–$10,000/mo',diff:'medium',time:8,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Write sales pages, email sequences, and ad copy. High-value skill — good copywriters earn significantly more than general writers.',
-   tags:['Sales','Email','Ads','High-value'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/copywriting/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/sales-copywriting'},{l:'CopyHackers',u:'https://copyhackers.com/freelance-copywriter/'}]},
+   desc:'Write high-converting sales pages, email sequences, and ad copy. One of the highest-paid writing niches — top copywriters charge $5k–$50k per project.',
+   tags:['Sales Pages','Email','Ads','High-value'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/copywriting/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/sales-copywriting'},{l:'CopyHackers',u:'https://copyhackers.com/freelance-copywriter/'},{l:'AWAI',u:'https://www.awai.com/'}]},
 
-  {id:'ebook',title:'Sell eBooks / Guides',icon:'📖',
-   skills:['writing','teaching'],earn:'₹5k–50k/mo',diff:'medium',time:20,online:true,capital:'none',
+  {id:'ebook',title:'Sell eBooks / Digital Guides',icon:'📖',
+   skills:['writing','teaching'],earn:'$200–$5,000/mo',diff:'medium',time:20,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Write once, sell forever. Self-publish on Amazon KDP, Gumroad, or your own website. Niche expertise converts well.',
-   tags:['Amazon KDP','Gumroad','Passive','Writing'],cat:'Digital Products',
-   links:[{l:'Amazon KDP',u:'https://kdp.amazon.com/'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Instamojo',u:'https://www.instamojo.com/'}]},
+   desc:'Write once, sell forever. Self-publish niche guides on Amazon KDP, Gumroad, or Payhip. Niche expertise (finance, fitness, coding) converts best.',
+   tags:['Amazon KDP','Gumroad','Passive'],cat:'Digital Products',
+   links:[{l:'Amazon KDP',u:'https://kdp.amazon.com/'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Payhip',u:'https://payhip.com/'},{l:'Lulu',u:'https://www.lulu.com/'}]},
 
   // DESIGN
   {id:'logo-design',title:'Logo & Brand Design',icon:'🎨',
-   skills:['design'],earn:'₹10k–1L/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['design'],earn:'$500–$8,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Design logos, social media kits, and brand identities for startups. Canva, Figma, and Adobe tools are the standard stack.',
-   tags:['Fiverr','Canva','Figma','Branding'],cat:'Freelance',
-   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/graphics-design/creative-logo-design'},{l:'99designs',u:'https://99designs.com/'},{l:'DesignCrowd',u:'https://www.designcrowd.com/'}]},
+   desc:'Design logos and brand identities for startups and small businesses globally. High demand with hundreds of new businesses launching every day.',
+   tags:['Fiverr','99designs','Branding'],cat:'Freelance',
+   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/graphics-design/creative-logo-design'},{l:'99designs',u:'https://99designs.com/'},{l:'DesignCrowd',u:'https://www.designcrowd.com/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/logo-design/'}]},
 
-  {id:'canva-templates',title:'Sell Canva Templates',icon:'🖼️',
-   skills:['design'],earn:'₹5k–40k/mo',diff:'easy',time:10,online:true,capital:'none',
+  {id:'canva-templates',title:'Sell Design Templates',icon:'🖼️',
+   skills:['design'],earn:'$300–$4,000/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Create and sell reusable Canva templates on Etsy, Creative Market, or Gumroad. One design can sell hundreds of times.',
-   tags:['Etsy','Canva','Passive','Templates'],cat:'Digital Products',
-   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Creative Market',u:'https://creativemarket.com/sell'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Canva',u:'https://www.canva.com/'}]},
+   desc:'Create reusable Canva, Notion, or PowerPoint templates and sell them on Etsy or Creative Market. One template can sell thousands of times.',
+   tags:['Etsy','Creative Market','Passive'],cat:'Digital Products',
+   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Creative Market',u:'https://creativemarket.com/sell'},{l:'Gumroad',u:'https://gumroad.com/'},{l:'Design Bundles',u:'https://designbundles.net/sell'}]},
 
-  {id:'ui-design',title:'UI/UX Freelance Design',icon:'📐',
-   skills:['design','coding'],earn:'₹30k–2L/mo',diff:'medium',time:10,online:true,capital:'none',
+  {id:'ui-design',title:'UI/UX Design',icon:'📐',
+   skills:['design','coding'],earn:'$2,000–$15,000/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Design app and web interfaces. Combine design and basic coding knowledge for premium rates on Toptal or Upwork.',
-   tags:['Figma','Toptal','Apps','High-rate'],cat:'Freelance',
-   links:[{l:'Toptal',u:'https://www.toptal.com/designers'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/ux-design/'},{l:'Dribbble Jobs',u:'https://dribbble.com/jobs'}]},
+   desc:'Design app and website interfaces for tech companies. One of the most in-demand and highest-paid freelance skills worldwide.',
+   tags:['Figma','Toptal','Apps'],cat:'Freelance',
+   links:[{l:'Toptal',u:'https://www.toptal.com/designers'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/ux-design/'},{l:'Dribbble Jobs',u:'https://dribbble.com/jobs'},{l:'Contra',u:'https://contra.com/'}]},
 
   // CODING
   {id:'freelance-dev',title:'Freelance Web Development',icon:'💻',
-   skills:['coding'],earn:'₹25k–2L/mo',diff:'medium',time:10,online:true,capital:'none',
+   skills:['coding'],earn:'$2,000–$15,000/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Build websites and apps for clients. WordPress, React, or no-code tools all pay well. Easiest entry: local businesses needing websites.',
-   tags:['Upwork','WordPress','React','Remote'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/web-development/'},{l:'Freelancer.in',u:'https://www.freelancer.in/jobs/website-design/'},{l:'Toptal',u:'https://www.toptal.com/developers'},{l:'PeoplePerHour',u:'https://www.peopleperhour.com/'}]},
+   desc:'Build websites and apps for clients. WordPress, React, and no-code tools all pay well. The global shortage of developers keeps rates high.',
+   tags:['Upwork','Toptal','React','WordPress'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/web-development/'},{l:'Toptal',u:'https://www.toptal.com/developers'},{l:'Freelancer',u:'https://www.freelancer.com/jobs/website-design/'},{l:'Gun.io',u:'https://gun.io/'}]},
 
-  {id:'saas',title:'Build & Sell a SaaS / Tool',icon:'🛠️',
-   skills:['coding'],earn:'₹50k–10L+/mo',diff:'hard',time:30,online:true,capital:'none',
+  {id:'saas',title:'Build & Sell a SaaS Product',icon:'🛠️',
+   skills:['coding'],earn:'$1,000–$100k+/mo',diff:'hard',time:30,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:false,
-   desc:'Build a small software product that solves a specific problem. Monthly subscriptions create passive, scalable income.',
+   desc:'Build a small software tool that solves a specific problem and charge a monthly subscription. Even a $29/month tool with 100 users = $2,900/month passively.',
    tags:['Indie Hacker','Stripe','Subscriptions'],cat:'Business',
-   links:[{l:'Indie Hackers',u:'https://www.indiehackers.com/'},{l:'Product Hunt',u:'https://www.producthunt.com/'},{l:'Razorpay',u:'https://razorpay.com/'},{l:'Lemon Squeezy',u:'https://www.lemonsqueezy.com/'}]},
+   links:[{l:'Indie Hackers',u:'https://www.indiehackers.com/'},{l:'Product Hunt',u:'https://www.producthunt.com/'},{l:'Stripe',u:'https://stripe.com/'},{l:'Lemon Squeezy',u:'https://www.lemonsqueezy.com/'}]},
 
   {id:'automation',title:'No-Code Automation Services',icon:'⚙️',
-   skills:['coding','admin'],earn:'₹15k–80k/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['coding','admin'],earn:'$1,000–$6,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Use Zapier, Make.com, or n8n to automate business workflows. Businesses pay well for saving hours of manual work.',
-   tags:['Zapier','Make.com','Automation','B2B'],cat:'Freelance',
+   desc:'Use Zapier or Make.com to automate business workflows. Businesses pay $500–$2,000 per automation project, and there\'s no shortage of clients.',
+   tags:['Zapier','Make.com','B2B'],cat:'Freelance',
    links:[{l:'Zapier',u:'https://zapier.com/'},{l:'Make.com',u:'https://www.make.com/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/automation/'},{l:'n8n',u:'https://n8n.io/'}]},
 
   // VIDEO
   {id:'youtube',title:'YouTube Channel',icon:'▶️',
-   skills:['video'],earn:'₹5k–5L/mo',diff:'hard',time:20,online:true,capital:'low',
+   skills:['video'],earn:'$200–$50k+/mo',diff:'hard',time:20,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Build an audience around your expertise. Monetise via AdSense, sponsorships, and digital products. Takes 6–12 months to ramp.',
+   desc:'Build an audience around your expertise and monetise via AdSense, sponsorships, and digital products. Takes 6–18 months to ramp up but becomes highly passive.',
    tags:['AdSense','Sponsorships','Long-term'],cat:'Content',
-   links:[{l:'YouTube Studio',u:'https://studio.youtube.com/'},{l:'Apply for Monetisation',u:'https://support.google.com/youtube/answer/72851'},{l:'TubeBuddy',u:'https://www.tubebuddy.com/'}]},
+   links:[{l:'YouTube Studio',u:'https://studio.youtube.com/'},{l:'Monetisation Info',u:'https://support.google.com/youtube/answer/72851'},{l:'TubeBuddy',u:'https://www.tubebuddy.com/'},{l:'vidIQ',u:'https://vidiq.com/'}]},
 
   {id:'video-editing',title:'Video Editing Services',icon:'🎬',
-   skills:['video'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['video'],earn:'$500–$5,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
-   desc:'Edit videos for YouTubers, businesses, and social media creators. High demand — creators outsource editing constantly.',
-   tags:['DaVinci','Premiere','YouTube','Reels'],cat:'Freelance',
-   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/video-animation/video-editing'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/video-editing/'},{l:'DaVinci (Free)',u:'https://www.blackmagicdesign.com/products/davinciresolve'}]},
+   desc:'Edit videos for YouTubers, podcasters, and brands. Massive demand — creators and businesses constantly outsource editing to save time.',
+   tags:['Fiverr','Upwork','YouTube'],cat:'Freelance',
+   links:[{l:'Fiverr',u:'https://www.fiverr.com/categories/video-animation/video-editing'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/video-editing/'},{l:'DaVinci (Free)',u:'https://www.blackmagicdesign.com/products/davinciresolve'},{l:'Descript',u:'https://www.descript.com/'}]},
 
-  {id:'shorts-ugc',title:'UGC / Short-Form Content Creator',icon:'📱',
-   skills:['video','marketing'],earn:'₹10k–1L/mo',diff:'easy',time:8,online:true,capital:'none',
+  {id:'ugc',title:'UGC Creator',icon:'📱',
+   skills:['video','marketing'],earn:'$500–$8,000/mo',diff:'easy',time:8,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Create short videos for brands (Instagram Reels, YouTube Shorts). UGC creators are in huge demand — no followers needed.',
-   tags:['Instagram','UGC','Brand Deals','Reels'],cat:'Content',
-   links:[{l:'Billo',u:'https://www.billo.app/'},{l:'Fiverr UGC',u:'https://www.fiverr.com/categories/video-animation/ugc-video'},{l:'Instagram',u:'https://www.instagram.com/'},{l:'Collabstr',u:'https://collabstr.com/'}]},
+   desc:'Create short-form videos for brands (Reels, TikTok, Shorts). UGC creators earn $100–$500 per video — no large following needed, just good content.',
+   tags:['TikTok','Instagram','Brands'],cat:'Content',
+   links:[{l:'Billo',u:'https://www.billo.app/'},{l:'Collabstr',u:'https://collabstr.com/'},{l:'Fiverr UGC',u:'https://www.fiverr.com/categories/video-animation/ugc-video'},{l:'Minisocial',u:'https://minisocial.com/'}]},
 
   // MARKETING
   {id:'smm',title:'Social Media Management',icon:'📣',
-   skills:['marketing'],earn:'₹10k–80k/mo',diff:'easy',time:8,online:true,capital:'none',
+   skills:['marketing'],earn:'$500–$6,000/mo',diff:'easy',time:8,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Manage Instagram, LinkedIn, and Twitter accounts for businesses. Low barrier to entry — most businesses need help.',
-   tags:['Instagram','LinkedIn','Clients','Retainer'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/social-media-management/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/online-marketing/social-marketing'},{l:'LinkedIn',u:'https://www.linkedin.com/jobs/social-media-manager-jobs/'}]},
+   desc:'Manage Instagram, LinkedIn, and X accounts for businesses. Most businesses know they need social media but don\'t have time — that\'s your in.',
+   tags:['Instagram','LinkedIn','Retainer'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/social-media-management/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/online-marketing/social-marketing'},{l:'Hootsuite',u:'https://www.hootsuite.com/'},{l:'Buffer',u:'https://buffer.com/'}]},
 
   {id:'affiliate',title:'Affiliate Marketing',icon:'🔗',
-   skills:['marketing','writing'],earn:'₹5k–2L/mo',diff:'medium',time:15,online:true,capital:'none',
+   skills:['marketing','writing'],earn:'$200–$20,000/mo',diff:'medium',time:15,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Earn commissions by promoting others\' products via blogs, YouTube, or social. Amazon Associates, ShareASale, and Impact are top networks.',
-   tags:['Amazon','ShareASale','Passive','Blog'],cat:'Digital',
-   links:[{l:'Amazon Associates',u:'https://affiliate-program.amazon.in/'},{l:'ShareASale',u:'https://www.shareasale.com/'},{l:'Impact',u:'https://impact.com/'},{l:'CJ Affiliate',u:'https://www.cj.com/'}]},
+   desc:'Earn commissions promoting other people\'s products via a blog, YouTube channel, or social media. Amazon, ShareASale, and Impact have thousands of programs.',
+   tags:['Amazon','ShareASale','Passive'],cat:'Digital',
+   links:[{l:'Amazon Associates',u:'https://affiliate-program.amazon.com/'},{l:'ShareASale',u:'https://www.shareasale.com/'},{l:'Impact',u:'https://impact.com/'},{l:'CJ Affiliate',u:'https://www.cj.com/'}]},
 
   {id:'email-marketing',title:'Email Marketing Consultant',icon:'📧',
-   skills:['marketing','writing'],earn:'₹15k–1L/mo',diff:'medium',time:8,online:true,capital:'none',
+   skills:['marketing','writing'],earn:'$1,000–$8,000/mo',diff:'medium',time:8,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Set up and run email campaigns for e-commerce brands. One of the highest-ROI channels — businesses pay premium rates.',
-   tags:['Mailchimp','Klaviyo','E-commerce','ROI'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/email-marketing/'},{l:'Mailchimp',u:'https://mailchimp.com/'},{l:'Klaviyo',u:'https://www.klaviyo.com/'},{l:'Brevo',u:'https://www.brevo.com/'}]},
+   desc:'Set up and manage email campaigns for e-commerce brands. Email consistently delivers $36 ROI per $1 spent — brands pay premium rates for this skill.',
+   tags:['Klaviyo','Mailchimp','E-commerce'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/email-marketing/'},{l:'Klaviyo',u:'https://www.klaviyo.com/'},{l:'Mailchimp',u:'https://mailchimp.com/'},{l:'Beehiiv',u:'https://www.beehiiv.com/'}]},
 
   // TEACHING
   {id:'online-course',title:'Sell an Online Course',icon:'🎓',
-   skills:['teaching'],earn:'₹10k–3L/mo',diff:'medium',time:30,online:true,capital:'none',
+   skills:['teaching'],earn:'$500–$20,000/mo',diff:'medium',time:30,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Package your knowledge into a course on Udemy, Teachable, or Kajabi. A good course sells indefinitely with minimal upkeep.',
-   tags:['Udemy','Teachable','Passive','Expertise'],cat:'Digital Products',
-   links:[{l:'Udemy',u:'https://www.udemy.com/teaching/'},{l:'Teachable',u:'https://teachable.com/'},{l:'Graphy',u:'https://graphy.com/'},{l:'Kajabi',u:'https://kajabi.com/'}]},
+   desc:'Package your expertise into a course and sell it indefinitely. Udemy has 65M+ students actively buying. A single good course can earn for years.',
+   tags:['Udemy','Teachable','Passive'],cat:'Digital Products',
+   links:[{l:'Udemy',u:'https://www.udemy.com/teaching/'},{l:'Teachable',u:'https://teachable.com/'},{l:'Kajabi',u:'https://kajabi.com/'},{l:'Thinkific',u:'https://www.thinkific.com/'}]},
 
   {id:'tutoring',title:'Online Tutoring',icon:'📚',
-   skills:['teaching'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['teaching'],earn:'$500–$5,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Tutor students online via Vedantu, Chegg, or directly via WhatsApp/Zoom. Academics, coding, music — anything works.',
-   tags:['Vedantu','Chegg','Zoom','Students'],cat:'Services',
-   links:[{l:'Vedantu',u:'https://www.vedantu.com/become-a-teacher'},{l:'UrbanPro',u:'https://www.urbanpro.com/become-tutor'},{l:'Chegg Tutors',u:'https://www.chegg.com/tutors/become-a-tutor/'},{l:'Superprof',u:'https://www.superprof.co.in/'}]},
+   desc:'Tutor students 1-on-1 via Zoom in academics, coding, music, languages, or test prep. Platforms connect you with paying students instantly.',
+   tags:['Wyzant','Chegg','Zoom'],cat:'Services',
+   links:[{l:'Wyzant',u:'https://www.wyzant.com/tutor'},{l:'Chegg Tutors',u:'https://www.chegg.com/tutors/become-a-tutor/'},{l:'Superprof',u:'https://www.superprof.com/'},{l:'Preply',u:'https://preply.com/en/teach'}]},
 
   // FINANCE
   {id:'bookkeeping',title:'Freelance Bookkeeping',icon:'📊',
-   skills:['finance'],earn:'₹15k–70k/mo',diff:'easy',time:5,online:true,capital:'none',
+   skills:['finance'],earn:'$1,000–$6,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Small businesses desperately need bookkeepers. Learn QuickBooks or Tally and offer monthly retainer services to local SMEs.',
-   tags:['QuickBooks','Tally','SME','Retainer'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/bookkeeping/'},{l:'QuickBooks',u:'https://quickbooks.intuit.com/in/'},{l:'Tally',u:'https://tallysolutions.com/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/accounting-bookkeeping'}]},
+   desc:'Small businesses worldwide desperately need bookkeepers. Learn QuickBooks or Xero and offer monthly retainer services — most clients stay for years.',
+   tags:['QuickBooks','Xero','Remote'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/bookkeeping/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/accounting-bookkeeping'},{l:'QuickBooks',u:'https://quickbooks.intuit.com/'},{l:'Xero',u:'https://www.xero.com/'}]},
 
-  {id:'stock-options',title:'Options / Stock Trading',icon:'📈',
+  {id:'stock-trading',title:'Stock & Options Trading',icon:'📈',
    skills:['finance'],earn:'Variable',diff:'hard',time:10,online:true,capital:'medium',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:false,
-   desc:'Trade equities, F&O, or index funds. Significant learning curve and risk — treat as supplemental, not primary income.',
-   tags:['Zerodha','NIFTY','Risk','Learning'],cat:'Investment',
-   links:[{l:'Zerodha',u:'https://zerodha.com/'},{l:'Groww',u:'https://groww.in/'},{l:'Angel One',u:'https://www.angelone.in/'},{l:'Varsity (Learn)',u:'https://zerodha.com/varsity/'}]},
+   desc:'Trade equities, options, or ETFs. Significant learning curve and real risk involved — best treated as a skill to build over time, not a quick income source.',
+   tags:['Risk','ETFs','Options'],cat:'Investment',
+   links:[{l:'Investopedia (Learn)',u:'https://www.investopedia.com/'},{l:'Interactive Brokers',u:'https://www.interactivebrokers.com/'},{l:'Webull',u:'https://www.webull.com/'},{l:'ThinkorSwim',u:'https://www.schwab.com/trading/thinkorswim'}]},
 
   // PHOTOGRAPHY
-  {id:'stock-photos',title:'Sell Stock Photos',icon:'📸',
-   skills:['photo'],earn:'₹3k–30k/mo',diff:'easy',time:5,online:true,capital:'low',
+  {id:'stock-photos',title:'Sell Stock Photos & Video',icon:'📸',
+   skills:['photo'],earn:'$100–$3,000/mo',diff:'easy',time:5,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Upload photos to Shutterstock, Adobe Stock, and Getty. Indian lifestyle, food, and travel content sells very well internationally.',
-   tags:['Shutterstock','Adobe Stock','Passive','Travel'],cat:'Digital Products',
-   links:[{l:'Shutterstock',u:'https://submit.shutterstock.com/'},{l:'Adobe Stock',u:'https://contributor.stock.adobe.com/'},{l:'Getty Images',u:'https://www.gettyimages.in/contributor'},{l:'Alamy',u:'https://www.alamy.com/contributor/'}]},
+   desc:'Upload photos and video clips to stock platforms and earn royalties every time they\'re downloaded. Lifestyle, nature, and business content sell best.',
+   tags:['Shutterstock','Adobe Stock','Passive'],cat:'Digital Products',
+   links:[{l:'Shutterstock',u:'https://submit.shutterstock.com/'},{l:'Adobe Stock',u:'https://contributor.stock.adobe.com/'},{l:'Getty Images',u:'https://www.gettyimages.com/contributor'},{l:'Alamy',u:'https://www.alamy.com/contributor/'}]},
 
   {id:'event-photo',title:'Event Photography',icon:'📷',
-   skills:['photo'],earn:'₹10k–50k/event',diff:'medium',time:8,online:false,capital:'medium',
+   skills:['photo'],earn:'$500–$5,000/event',diff:'medium',time:8,online:false,capital:'medium',
    passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
-   desc:'Shoot weddings, corporate events, and birthday parties. Weekend work can bring ₹15k–50k per event in metro cities.',
-   tags:['Weddings','Corporate','Weekend','Events'],cat:'Services',
-   links:[{l:'WedMeGood',u:'https://www.wedmegood.com/vendor/signup'},{l:'ShaadiSaga',u:'https://www.shaadisaga.com/vendors'},{l:'JustDial',u:'https://www.justdial.com/'},{l:'Instagram',u:'https://www.instagram.com/'}]},
+   desc:'Shoot weddings, corporate events, and portraits. A single weekend wedding can earn $1,000–$5,000. Build a portfolio and let word-of-mouth work for you.',
+   tags:['Weddings','Portraits','Local'],cat:'Services',
+   links:[{l:'The Knot',u:'https://www.theknotvendors.com/'},{l:'Thumbtack',u:'https://www.thumbtack.com/'},{l:'Bark.com',u:'https://www.bark.com/'},{l:'Zenfolio',u:'https://zenfolio.com/'}]},
 
   // MUSIC / AUDIO
-  {id:'music-prod',title:'Music Production / Beats',icon:'🎵',
-   skills:['music'],earn:'₹5k–1L/mo',diff:'medium',time:10,online:true,capital:'low',
+  {id:'music-prod',title:'Music Production & Licensing',icon:'🎵',
+   skills:['music'],earn:'$200–$8,000/mo',diff:'medium',time:10,online:true,capital:'low',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Sell beats on BeatStars, license music on Epidemic Sound, or create jingles for brands. Royalties are truly passive.',
+   desc:'Sell beats, license background music, or create jingles for brands. Music royalties are genuinely passive — a popular beat can earn for years.',
    tags:['BeatStars','Epidemic Sound','Royalties'],cat:'Digital Products',
    links:[{l:'BeatStars',u:'https://www.beatstars.com/'},{l:'Epidemic Sound',u:'https://www.epidemicsound.com/creators/'},{l:'Pond5',u:'https://www.pond5.com/sell-music'},{l:'AudioJungle',u:'https://audiojungle.net/'}]},
 
   {id:'voiceover',title:'Voiceover Artist',icon:'🎙️',
-   skills:['music','language'],earn:'₹5k–60k/mo',diff:'easy',time:5,online:true,capital:'low',
+   skills:['music','language'],earn:'$300–$5,000/mo',diff:'easy',time:5,online:true,capital:'low',
    passive:false,fast:true,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Record voiceovers for ads, audiobooks, explainer videos, and apps. India has huge demand for regional language voice talent.',
-   tags:['Voices.com','Fiverr','Regional','Audiobooks'],cat:'Freelance',
-   links:[{l:'Voices.com',u:'https://www.voices.com/talent/register'},{l:'Fiverr',u:'https://www.fiverr.com/categories/music-audio/voice-over'},{l:'Voice123',u:'https://voice123.com/'},{l:'ACX (Audiobooks)',u:'https://www.acx.com/'}]},
+   desc:'Record voiceovers for ads, audiobooks, explainer videos, e-learning, and apps. A decent microphone and quiet room is all you need to start.',
+   tags:['Voices.com','ACX','Audiobooks'],cat:'Freelance',
+   links:[{l:'Voices.com',u:'https://www.voices.com/talent/register'},{l:'Voice123',u:'https://voice123.com/'},{l:'ACX (Audiobooks)',u:'https://www.acx.com/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/music-audio/voice-over'}]},
 
   // DRIVING
-  {id:'delivery',title:'Delivery / Logistics',icon:'🚗',
-   skills:['driving'],earn:'₹15k–40k/mo',diff:'easy',time:20,online:false,capital:'none',
+  {id:'delivery',title:'Delivery Driver',icon:'🚗',
+   skills:['driving'],earn:'$800–$2,500/mo',diff:'easy',time:20,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Deliver for Swiggy, Zomato, Blinkit, or Dunzo. Flexible hours, immediate payment, and no interviews required.',
-   tags:['Swiggy','Zomato','Blinkit','Gig'],cat:'Gig Economy',
-   links:[{l:'Swiggy',u:'https://delivery.swiggy.com/'},{l:'Zomato',u:'https://www.zomato.com/rider'},{l:'Blinkit',u:'https://blinkit.com/delivery-partner'},{l:'Porter',u:'https://porter.in/driver-partner'}]},
+   desc:'Deliver food, groceries, or packages for gig platforms. Flexible hours, no interview, paid weekly. Works in most major cities worldwide.',
+   tags:['DoorDash','Instacart','Uber Eats'],cat:'Gig Economy',
+   links:[{l:'DoorDash',u:'https://driver.doordash.com/'},{l:'Uber Eats',u:'https://www.uber.com/us/en/deliver/'},{l:'Instacart',u:'https://shoppers.instacart.com/'},{l:'Amazon Flex',u:'https://flex.amazon.com/'}]},
 
-  {id:'cab',title:'Cab / Ride Sharing',icon:'🚕',
-   skills:['driving'],earn:'₹20k–50k/mo',diff:'easy',time:20,online:false,capital:'none',
+  {id:'rideshare',title:'Rideshare Driver',icon:'🚕',
+   skills:['driving'],earn:'$1,000–$3,500/mo',diff:'easy',time:20,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Drive for Ola or Uber during peak hours. Surge pricing on weekends and evenings significantly boosts earnings.',
-   tags:['Ola','Uber','Surge','Flexible'],cat:'Gig Economy',
-   links:[{l:'Ola',u:'https://www.olacabs.com/driver-partner'},{l:'Uber',u:'https://www.uber.com/in/en/drive/'},{l:'Rapido',u:'https://www.rapido.bike/captain'}]},
+   desc:'Drive passengers for Uber or Lyft. Surge pricing on evenings and weekends significantly boosts earnings. Set your own schedule completely.',
+   tags:['Uber','Lyft','Flexible'],cat:'Gig Economy',
+   links:[{l:'Uber',u:'https://www.uber.com/us/en/drive/'},{l:'Lyft',u:'https://www.lyft.com/driver'},{l:'Bolt',u:'https://driver.bolt.eu/'},{l:'Grab',u:'https://www.grab.com/sg/driver/'}]},
 
   // COOKING
-  {id:'cloud-kitchen',title:'Cloud / Home Kitchen',icon:'🍳',
-   skills:['cooking'],earn:'₹15k–1L/mo',diff:'medium',time:15,online:false,capital:'low',
+  {id:'meal-delivery',title:'Home Cook / Meal Prep Service',icon:'🍳',
+   skills:['cooking'],earn:'$500–$4,000/mo',diff:'medium',time:15,online:false,capital:'low',
    passive:false,fast:false,scalable:true,flexible:false,creative:true,lowrisk:false,
-   desc:'Register as a home chef on Zomato or Swiggy. Office tiffin services and meal preps have strong repeat demand.',
-   tags:['Zomato','Swiggy','Tiffin','Food'],cat:'Business',
-   links:[{l:'Zomato Partner',u:'https://www.zomato.com/partner'},{l:'Swiggy Partner',u:'https://partner.swiggy.com/'},{l:'EatSure',u:'https://eatsure.com/'},{l:'FSSAI (Licence)',u:'https://foscos.fssai.gov.in/'}]},
-
-  {id:'baking',title:'Home Baking Business',icon:'🎂',
-   skills:['cooking','craft'],earn:'₹5k–40k/mo',diff:'easy',time:10,online:false,capital:'low',
-   passive:false,fast:true,scalable:false,flexible:true,creative:true,lowrisk:true,
-   desc:'Sell custom cakes, cookies, and baked goods. Instagram and WhatsApp groups are the most effective sales channels.',
-   tags:['Instagram','Custom Cakes','Events','Local'],cat:'Business',
-   links:[{l:'Instagram',u:'https://www.instagram.com/'},{l:'Instamojo',u:'https://www.instamojo.com/'},{l:'FSSAI (Licence)',u:'https://foscos.fssai.gov.in/'},{l:'WhatsApp Business',u:'https://business.whatsapp.com/'}]},
+   desc:'Cook and sell meals locally via gig platforms or directly through Instagram and WhatsApp. Office meal prep and specialty diets (keto, vegan) have the best margins.',
+   tags:['Local','Meal Prep','Delivery'],cat:'Business',
+   links:[{l:'EatWith',u:'https://www.eatwith.com/become-a-host'},{l:'Shef',u:'https://www.shef.com/cook'},{l:'Cookpad',u:'https://cookpad.com/'},{l:'Facebook Groups',u:'https://www.facebook.com/groups/'}]},
 
   // PETS
-  {id:'pet-sitting',title:'Pet Sitting / Dog Walking',icon:'🐾',
-   skills:['pets'],earn:'₹5k–25k/mo',diff:'easy',time:5,online:false,capital:'none',
+  {id:'pet-services',title:'Pet Sitting & Dog Walking',icon:'🐾',
+   skills:['pets'],earn:'$300–$2,500/mo',diff:'easy',time:5,online:false,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Offer pet sitting and dog walking via Supertails, local Facebook groups, or word of mouth in your society.',
-   tags:['Supertails','Local','Dogs','Weekend'],cat:'Services',
-   links:[{l:'Supertails',u:'https://supertails.com/'},{l:'DogStays',u:'https://www.dogstays.in/'},{l:'PetBacker',u:'https://www.petbacker.in/'},{l:'Wagr',u:'https://www.wagr.in/'}]},
+   desc:'Walk dogs and pet-sit while owners are at work or away. Rover connects you with pet owners in your city — start earning within days of signing up.',
+   tags:['Rover','Wag','Local'],cat:'Services',
+   links:[{l:'Rover',u:'https://www.rover.com/become-a-sitter/'},{l:'Wag',u:'https://wagwalking.com/apply'},{l:'Bark.com',u:'https://www.bark.com/'},{l:'Thumbtack',u:'https://www.thumbtack.com/'}]},
 
   // CRAFT
-  {id:'etsy',title:'Sell Handmade on Etsy / Meesho',icon:'🧵',
-   skills:['craft'],earn:'₹5k–50k/mo',diff:'medium',time:15,online:true,capital:'low',
+  {id:'etsy',title:'Sell Handmade Products',icon:'🧵',
+   skills:['craft'],earn:'$300–$5,000/mo',diff:'medium',time:15,online:true,capital:'low',
    passive:false,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Sell handmade jewellery, art prints, candles, or décor on Etsy or Meesho. Unique Indian crafts do especially well internationally.',
-   tags:['Etsy','Meesho','Handmade','Export'],cat:'Business',
-   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Meesho',u:'https://supplier.meesho.com/'},{l:'Amazon Handmade',u:'https://sell.amazon.in/programs/amazon-handmade'},{l:'Craftsvilla',u:'https://www.craftsvilla.com/'}]},
+   desc:'Sell handmade jewellery, art, candles, or décor on Etsy. The global handmade market is booming — unique, personalised items command premium prices.',
+   tags:['Etsy','Amazon Handmade','Crafts'],cat:'Business',
+   links:[{l:'Etsy',u:'https://www.etsy.com/sell'},{l:'Amazon Handmade',u:'https://sell.amazon.com/programs/handmade'},{l:'Folksy',u:'https://folksy.com/'},{l:'NotOnTheHighStreet',u:'https://www.notonthehighstreet.com/'}]},
 
   {id:'print-on-demand',title:'Print-on-Demand Store',icon:'👕',
-   skills:['design','craft'],earn:'₹3k–40k/mo',diff:'easy',time:10,online:true,capital:'none',
+   skills:['design','craft'],earn:'$200–$4,000/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:true,fast:false,scalable:true,flexible:true,creative:true,lowrisk:true,
-   desc:'Upload your designs to Redbubble, Merch by Amazon, or Printful. Products print and ship automatically — no inventory needed.',
-   tags:['Redbubble','Amazon Merch','Passive','No inventory'],cat:'Digital Products',
+   desc:'Upload designs — t-shirts, mugs, phone cases print and ship automatically when someone buys. Zero inventory, zero upfront cost, truly passive once live.',
+   tags:['Redbubble','Merch by Amazon','Passive'],cat:'Digital Products',
    links:[{l:'Redbubble',u:'https://www.redbubble.com/sell/overview'},{l:'Merch by Amazon',u:'https://merch.amazon.com/'},{l:'Printful',u:'https://www.printful.com/'},{l:'Printify',u:'https://printify.com/'}]},
 
   // LANGUAGE
-  {id:'translation',title:'Translation / Localisation',icon:'🌐',
-   skills:['language','writing'],earn:'₹10k–60k/mo',diff:'easy',time:5,online:true,capital:'none',
+  {id:'translation',title:'Translation & Localisation',icon:'🌐',
+   skills:['language','writing'],earn:'$500–$5,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Translate documents, apps, and websites for global businesses. South Asian language pairs (Hindi, Tamil, Bengali) are in high demand.',
-   tags:['ProZ','Upwork','Hindi','Tamil'],cat:'Freelance',
-   links:[{l:'ProZ',u:'https://www.proz.com/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/translation/'},{l:'Gengo',u:'https://gengo.com/translators/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/writing-translation/translation'}]},
+   desc:'Translate documents, apps, and websites for global businesses. Rare language pairs (especially Asian and Middle Eastern languages) command premium rates.',
+   tags:['ProZ','Gengo','Languages'],cat:'Freelance',
+   links:[{l:'ProZ',u:'https://www.proz.com/'},{l:'Gengo',u:'https://gengo.com/translators/'},{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/translation/'},{l:'One Hour Translation',u:'https://www.onehourtranslation.com/'}]},
+
+  {id:'language-teaching',title:'Teach Your Language Online',icon:'🗣️',
+   skills:['language','teaching'],earn:'$500–$4,000/mo',diff:'easy',time:8,online:true,capital:'none',
+   passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
+   desc:'Teach your native language to learners worldwide via iTalki or Preply. English, Spanish, French, Mandarin, and Japanese are most in demand.',
+   tags:['iTalki','Preply','Native Language'],cat:'Services',
+   links:[{l:'iTalki',u:'https://www.italki.com/i/teacher'},{l:'Preply',u:'https://preply.com/en/teach'},{l:'Cambly',u:'https://www.cambly.com/en/tutors'},{l:'Verbling',u:'https://www.verbling.com/teach'}]},
 
   // FITNESS
   {id:'pt',title:'Online Personal Trainer',icon:'💪',
-   skills:['fitness'],earn:'₹10k–80k/mo',diff:'medium',time:10,online:true,capital:'none',
+   skills:['fitness'],earn:'$1,000–$8,000/mo',diff:'medium',time:10,online:true,capital:'none',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:true,
-   desc:'Coach clients via Zoom, WhatsApp, or a fitness app. Sell monthly transformation packages rather than per-session rates.',
-   tags:['Zoom','Instagram','Transformation','Health'],cat:'Services',
-   links:[{l:'Classplus',u:'https://classplusapp.com/'},{l:'Cult.fit Partner',u:'https://www.cult.fit/teach-at-cult'},{l:'Trainerize',u:'https://www.trainerize.com/'},{l:'Instagram',u:'https://www.instagram.com/'}]},
+   desc:'Coach clients 1-on-1 via video or sell monthly training programs. Instagram and TikTok are the best client acquisition channels — showcase your own results.',
+   tags:['Trainerize','Instagram','Programs'],cat:'Services',
+   links:[{l:'Trainerize',u:'https://www.trainerize.com/'},{l:'My PT Hub',u:'https://www.mypthub.net/'},{l:'Mindbody',u:'https://www.mindbodyonline.com/'},{l:'TrueCoach',u:'https://truecoach.co/'}]},
 
   // RESEARCH / ADMIN
   {id:'va',title:'Virtual Assistant',icon:'🗂️',
-   skills:['admin'],earn:'₹10k–50k/mo',diff:'easy',time:10,online:true,capital:'none',
+   skills:['admin'],earn:'$500–$4,000/mo',diff:'easy',time:10,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Handle emails, scheduling, data entry, and research for busy entrepreneurs. Recurring retainers are the norm.',
-   tags:['VA','Remote','Entrepreneurs','Retainer'],cat:'Freelance',
-   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/virtual-assistant/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/virtual-assistant'},{l:'Wishup',u:'https://www.wishup.co/'},{l:'Fancy Hands',u:'https://www.fancyhands.com/'}]},
+   desc:'Handle emails, scheduling, research, and data entry for busy entrepreneurs and executives. Recurring monthly retainers make this a stable, predictable income.',
+   tags:['Upwork','Fiverr','Remote'],cat:'Freelance',
+   links:[{l:'Upwork',u:'https://www.upwork.com/freelance-jobs/virtual-assistant/'},{l:'Fiverr',u:'https://www.fiverr.com/categories/business/virtual-assistant'},{l:'Belay',u:'https://belaysolutions.com/'},{l:'Time Etc',u:'https://web.timeetc.com/'}]},
 
-  {id:'research',title:'Market Research / Surveys',icon:'🔍',
-   skills:['research','admin'],earn:'₹2k–15k/mo',diff:'easy',time:3,online:true,capital:'none',
+  {id:'surveys',title:'Paid Surveys & User Testing',icon:'🔍',
+   skills:['research','admin'],earn:'$50–$500/mo',diff:'easy',time:3,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Participate in paid surveys, usability tests, and focus groups. Not a full income but easy extra cash with zero skills needed.',
-   tags:['UserTesting','Toluna','Surveys','Easy'],cat:'Gig Economy',
-   links:[{l:'UserTesting',u:'https://www.usertesting.com/be-a-user-tester'},{l:'Toluna',u:'https://in.toluna.com/'},{l:'Swagbucks',u:'https://www.swagbucks.com/'},{l:'Respondent.io',u:'https://app.respondent.io/respondents'}]},
+   desc:'Get paid to test websites, apps, and share opinions in surveys. Not a full income but genuinely easy extra cash — UserTesting pays $10 per 20-min test.',
+   tags:['UserTesting','Respondent','Surveys'],cat:'Gig Economy',
+   links:[{l:'UserTesting',u:'https://www.usertesting.com/be-a-user-tester'},{l:'Respondent.io',u:'https://app.respondent.io/respondents'},{l:'Prolific',u:'https://www.prolific.com/'},{l:'Swagbucks',u:'https://www.swagbucks.com/'}]},
 
-  // UNIVERSAL
+  // BUSINESS
   {id:'dropshipping',title:'Dropshipping Store',icon:'📦',
-   skills:[],earn:'₹10k–2L/mo',diff:'hard',time:20,online:true,capital:'low',
+   skills:[],earn:'$500–$10,000/mo',diff:'hard',time:20,online:true,capital:'low',
    passive:false,fast:false,scalable:true,flexible:true,creative:false,lowrisk:false,
-   desc:'Sell products online without holding inventory. Supplier ships directly to customer. Requires strong marketing skills to succeed.',
-   tags:['Shopify','AliExpress','Marketing','eCommerce'],cat:'Business',
-   links:[{l:'Shopify',u:'https://www.shopify.com/in'},{l:'AliExpress',u:'https://www.aliexpress.com/'},{l:'IndiaMart',u:'https://www.indiamart.com/'},{l:'DSers',u:'https://www.dsers.com/'}]},
+   desc:'Sell products online without holding inventory — supplier ships directly to your customer. Requires strong marketing skills and product research to succeed.',
+   tags:['Shopify','AliExpress','eCommerce'],cat:'Business',
+   links:[{l:'Shopify',u:'https://www.shopify.com/'},{l:'AliExpress',u:'https://www.aliexpress.com/'},{l:'DSers',u:'https://www.dsers.com/'},{l:'Zendrop',u:'https://zendrop.com/'}]},
 
-  {id:'reselling',title:'Reselling (Meesho / OLX)',icon:'🛒',
-   skills:[],earn:'₹5k–30k/mo',diff:'easy',time:8,online:true,capital:'low',
+  {id:'reselling',title:'Online Reselling / Flipping',icon:'🛒',
+   skills:[],earn:'$300–$3,000/mo',diff:'easy',time:8,online:true,capital:'low',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Buy low and sell high on OLX, Facebook Marketplace, or Meesho. Clothes, electronics, and furniture flip fastest.',
-   tags:['OLX','Meesho','Resell','No skill'],cat:'Business',
-   links:[{l:'OLX',u:'https://www.olx.in/'},{l:'Meesho',u:'https://supplier.meesho.com/'},{l:'Facebook Marketplace',u:'https://www.facebook.com/marketplace/'},{l:'Quikr',u:'https://www.quikr.com/'}]},
+   desc:'Buy low on clearance, thrift stores, or garage sales and sell high on eBay, Facebook Marketplace, or Amazon. Electronics, sneakers, and vintage items flip fastest.',
+   tags:['eBay','Facebook Marketplace','Flipping'],cat:'Business',
+   links:[{l:'eBay',u:'https://www.ebay.com/sl/sell'},{l:'Facebook Marketplace',u:'https://www.facebook.com/marketplace/'},{l:'Poshmark',u:'https://poshmark.com/sell'},{l:'Mercari',u:'https://www.mercari.com/sell/'}]},
 
-  {id:'domain-flipping',title:'Domain / Website Flipping',icon:'🌍',
-   skills:['research'],earn:'₹5k–5L/sale',diff:'medium',time:5,online:true,capital:'low',
+  {id:'domain-flipping',title:'Domain & Website Flipping',icon:'🌍',
+   skills:['research'],earn:'$200–$50k/sale',diff:'medium',time:5,online:true,capital:'low',
    passive:true,fast:false,scalable:false,flexible:true,creative:false,lowrisk:false,
-   desc:'Buy undervalued domain names or websites and sell them for profit. Flippa is the main marketplace. Requires patience.',
-   tags:['Flippa','Domains','Investment','Patience'],cat:'Investment',
+   desc:'Buy undervalued domain names or small websites and sell them for profit. A $10 domain can flip for $500–$5,000. Flippa is the main marketplace.',
+   tags:['Flippa','Domains','Investment'],cat:'Investment',
    links:[{l:'Flippa',u:'https://flippa.com/'},{l:'GoDaddy Auctions',u:'https://auctions.godaddy.com/'},{l:'Sedo',u:'https://sedo.com/'},{l:'Motion Invest',u:'https://motioninvest.com/'}]},
 
-  {id:'task-apps',title:'Task & Gig Apps',icon:'📋',
-   skills:[],earn:'₹5k–20k/mo',diff:'easy',time:5,online:true,capital:'none',
+  {id:'task-apps',title:'Micro-Task & Gig Apps',icon:'📋',
+   skills:[],earn:'$100–$1,000/mo',diff:'easy',time:5,online:true,capital:'none',
    passive:false,fast:true,scalable:false,flexible:true,creative:false,lowrisk:true,
-   desc:'Complete micro-tasks on Urban Company, TaskRabbit (India), or Amazon Mechanical Turk. Good filler income.',
-   tags:['Urban Company','Gig','Micro-tasks','Flexible'],cat:'Gig Economy',
-   links:[{l:'Urban Company',u:'https://www.urbancompany.com/become-a-professional'},{l:'Amazon MTurk',u:'https://www.mturk.com/'},{l:'Taskmo',u:'https://taskmo.com/'},{l:'Gigtel',u:'https://gigtel.in/'}]},
+   desc:'Complete small tasks on platforms like TaskRabbit, Amazon MTurk, or Gigwalk. Great for filling spare hours and building cash fast with zero barriers to entry.',
+   tags:['TaskRabbit','MTurk','Gig'],cat:'Gig Economy',
+   links:[{l:'TaskRabbit',u:'https://www.taskrabbit.com/become-a-tasker'},{l:'Amazon MTurk',u:'https://www.mturk.com/'},{l:'Gigwalk',u:'https://www.gigwalk.com/'},{l:'Field Agent',u:'https://www.fieldagent.net/'}]},
 ];
 
-// ─── STATE ──────────────────────────────────────────────────────────────────
-let activeFilter = 'All';
-
-function getSelected(groupId){
-  return [...document.querySelectorAll(`#${groupId} .chip.sel`)].map(c=>c.dataset.v);
-}
+// ── helpers ──────────────────────────────────────────────────────────────────
+function getSelected(id){ return [...document.querySelectorAll(`#${id} .chip.sel`)].map(c=>c.dataset.v) }
 
 function updateSlider(el,valId,unit){
   const v=el.value;
   el.style.setProperty('--pct',(v/el.max*100)+'%');
   document.getElementById(valId).textContent=v+' '+unit;
 }
-// init slider
+
 window.addEventListener('DOMContentLoaded',()=>{
-  const sl=document.getElementById('time-slider');
-  sl.style.setProperty('--pct','25%');
+  document.getElementById('time-slider').style.setProperty('--pct','25%');
 });
 
-// Single-select chip groups
 ['capital-chips','style-chips','goal-chips'].forEach(gid=>{
   document.getElementById(gid).addEventListener('click',e=>{
-    const chip=e.target.closest('.chip');
-    if(!chip)return;
-    document.querySelectorAll(`#${gid} .chip`).forEach(c=>c.classList.remove('sel'));
-    chip.classList.add('sel');
+    const c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll(`#${gid} .chip`).forEach(x=>x.classList.remove('sel'));
+    c.classList.add('sel');
   });
 });
-
-// Multi-select
 ['skill-chips','pref-chips'].forEach(gid=>{
   document.getElementById(gid).addEventListener('click',e=>{
-    const chip=e.target.closest('.chip');
-    if(chip)chip.classList.toggle('sel');
+    const c=e.target.closest('.chip'); if(c)c.classList.toggle('sel');
   });
 });
 
@@ -770,534 +588,76 @@ function go(n){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ─── CANVA GENERATOR ────────────────────────────────────────────────────────
-
-function useEg(el){
-  document.getElementById('tpl-prompt').value = el.textContent.replace(/^..\s/,'');
-}
-
-const PLATFORMS = [
-  {keys:['instagram post','ig post','instagram photo','insta post'],id:'ig-post',label:'Instagram Post',w:1080,h:1080,ratio:'1:1',aspect:'100%'},
-  {keys:['instagram story','ig story','insta story','story'],id:'ig-story',label:'Instagram Story',w:1080,h:1920,ratio:'9:16',aspect:'177.7%'},
-  {keys:['instagram reel','reel'],id:'ig-reel',label:'Instagram Reel',w:1080,h:1920,ratio:'9:16',aspect:'177.7%'},
-  {keys:['youtube thumbnail','yt thumbnail','youtube thumb'],id:'yt-thumb',label:'YouTube Thumbnail',w:1280,h:720,ratio:'16:9',aspect:'56.25%'},
-  {keys:['youtube banner','channel art','youtube cover'],id:'yt-banner',label:'YouTube Banner',w:2560,h:1440,ratio:'16:9',aspect:'56.25%'},
-  {keys:['pinterest','pin'],id:'pinterest',label:'Pinterest Pin',w:1000,h:1500,ratio:'2:3',aspect:'150%'},
-  {keys:['facebook post','fb post','facebook photo'],id:'fb-post',label:'Facebook Post',w:1200,h:630,ratio:'1.91:1',aspect:'52.5%'},
-  {keys:['facebook ad','fb ad'],id:'fb-ad',label:'Facebook Ad',w:1200,h:628,ratio:'1.91:1',aspect:'52.3%'},
-  {keys:['linkedin post','linkedin photo'],id:'li-post',label:'LinkedIn Post',w:1200,h:627,ratio:'1.91:1',aspect:'52.2%'},
-  {keys:['linkedin banner','linkedin cover'],id:'li-banner',label:'LinkedIn Banner',w:1584,h:396,ratio:'4:1',aspect:'25%'},
-  {keys:['twitter','tweet','x post'],id:'twitter',label:'Twitter / X Post',w:1600,h:900,ratio:'16:9',aspect:'56.25%'},
-  {keys:['flyer','poster','event poster','promo flyer'],id:'flyer',label:'Flyer / Poster',w:794,h:1123,ratio:'A4',aspect:'141.4%'},
-  {keys:['business card'],id:'biz-card',label:'Business Card',w:1050,h:600,ratio:'3.5:2',aspect:'57.1%'},
-  {keys:['presentation','slide','pitch deck'],id:'slides',label:'Presentation Slide',w:1920,h:1080,ratio:'16:9',aspect:'56.25%'},
-  {keys:['logo'],id:'logo',label:'Logo Design',w:500,h:500,ratio:'1:1',aspect:'100%'},
-  {keys:['email banner','email header','newsletter'],id:'email',label:'Email Banner',w:600,h:200,ratio:'3:1',aspect:'33.3%'},
-];
-
-const NICHES = [
-  {keys:['coffee','cafe','espresso','latte','brew'],id:'coffee',label:'Coffee / Cafe',
-   palettes:[
-     {name:'Warm Roast',colors:['#2C1A0E','#8B4513','#D2691E','#F5DEB3','#FFF8F0']},
-     {name:'Modern Minimal',colors:['#1A1A1A','#3D2B1F','#C8A882','#F0E6D3','#FFFFFF']},
-     {name:'Earthy Vibes',colors:['#4A3728','#8C6E54','#C4A882','#E8D5B7','#F9F3E8']},
-   ],
-   fonts:[
-     {heading:'Playfair Display',body:'Lato',hStyle:'font-family:Georgia,serif',bStyle:'font-family:sans-serif'},
-     {heading:'Abril Fatface',body:'Open Sans',hStyle:'font-family:Georgia,serif;font-weight:900',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Wake Up & Smell the Coffee'},
-     {label:'Subtext',text:'Freshly brewed, lovingly crafted. Visit us today.'},
-     {label:'CTA',text:'Order Now'},
-     {label:'Tagline',text:'Your perfect cup awaits ☕'},
-     {label:'Promo',text:'Buy 1 Get 1 Free — This Weekend Only!'},
-   ],
-   mood:'warm'},
-
-  {keys:['fitness','gym','workout','exercise','muscle','training','bodybuilding'],id:'fitness',label:'Fitness / Gym',
-   palettes:[
-     {name:'Power Black',colors:['#0A0A0A','#1C1C1C','#FF3A00','#FF6B35','#FFFFFF']},
-     {name:'Electric Blue',colors:['#050E1A','#0A2540','#00B4FF','#00E5FF','#FFFFFF']},
-     {name:'Neon Energy',colors:['#0D0D0D','#1A1A1A','#BEFF00','#FF006E','#FFFFFF']},
-   ],
-   fonts:[
-     {heading:'Impact',body:'Roboto',hStyle:'font-family:Impact,sans-serif',bStyle:'font-family:sans-serif'},
-     {heading:'Oswald',body:'Open Sans',hStyle:'font-family:Impact,sans-serif;font-weight:700;text-transform:uppercase',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'NO EXCUSES. JUST RESULTS.'},
-     {label:'Subtext',text:'Push your limits and unlock your potential.'},
-     {label:'CTA',text:'Start Training Today'},
-     {label:'Tagline',text:'Train Hard. Recover Smart. Repeat.'},
-     {label:'Promo',text:'First Month FREE — Limited Spots!'},
-   ],
-   mood:'bold'},
-
-  {keys:['yoga','meditation','mindfulness','wellness','calm','zen'],id:'yoga',label:'Yoga / Wellness',
-   palettes:[
-     {name:'Sage Calm',colors:['#2D4A3E','#4A7C6F','#8FBC8F','#D4E6D4','#F5F9F5']},
-     {name:'Sunrise',colors:['#3D2B4A','#6B4E8C','#E8A87C','#F7C59F','#FFF8F2']},
-     {name:'Ocean Breath',colors:['#0B3D4A','#1A6B8A','#4DB8C8','#A8E6EF','#F0FAFB']},
-   ],
-   fonts:[
-     {heading:'Cormorant Garamond',body:'Raleway',hStyle:'font-family:Georgia,serif;font-style:italic',bStyle:'font-family:sans-serif;font-weight:300'},
-     {heading:'Josefin Sans',body:'Lato',hStyle:'font-family:sans-serif;font-weight:300;letter-spacing:3px;text-transform:uppercase',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Find Your Flow'},
-     {label:'Subtext',text:'Breathe. Move. Transform. Join our community.'},
-     {label:'CTA',text:'Book a Free Class'},
-     {label:'Tagline',text:'Peace begins on the mat 🧘'},
-     {label:'Promo',text:'New Student Special — ₹499 for 30 Days'},
-   ],
-   mood:'calm'},
-
-  {keys:['food','restaurant','dining','meal','recipe','chef','cuisine','eat','hungry'],id:'food',label:'Food / Restaurant',
-   palettes:[
-     {name:'Appetite Red',colors:['#8B0000','#CC2200','#FF6B35','#FFD700','#FFF9F0']},
-     {name:'Fresh Garden',colors:['#1A3A1A','#2D6A2D','#7DB87D','#C8E6C8','#F5FFF5']},
-     {name:'Premium Dark',colors:['#1A1208','#2C2010','#8B6914','#D4AF37','#FFFFF0']},
-   ],
-   fonts:[
-     {heading:'Playfair Display',body:'Source Sans Pro',hStyle:'font-family:Georgia,serif',bStyle:'font-family:sans-serif'},
-     {heading:'Lobster',body:'Montserrat',hStyle:'font-family:cursive',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Taste the Difference'},
-     {label:'Subtext',text:'Handcrafted with the finest ingredients, served fresh daily.'},
-     {label:'CTA',text:'Reserve Your Table'},
-     {label:'Tagline',text:'Good food. Great memories. 🍽️'},
-     {label:'Promo',text:'20% Off All Orders This Week!'},
-   ],
-   mood:'warm'},
-
-  {keys:['beauty','makeup','cosmetic','skincare','salon','hair','glow','lipstick','fashion'],id:'beauty',label:'Beauty / Fashion',
-   palettes:[
-     {name:'Rose Gold',colors:['#2A1020','#8B3A62','#E8A0BF','#F7D6E8','#FFF5FB']},
-     {name:'Nude Luxe',colors:['#1A1208','#4A3520','#C4956A','#E8C9A8','#FFF8F2']},
-     {name:'Bold Glam',colors:['#0A0A0A','#2A0A2A','#FF006E','#FF85C0','#FFFFFF']},
-   ],
-   fonts:[
-     {heading:'Didact Gothic',body:'Montserrat',hStyle:'font-family:Georgia,serif;font-weight:300;letter-spacing:4px;text-transform:uppercase',bStyle:'font-family:sans-serif;font-weight:300'},
-     {heading:'Playfair Display',body:'Raleway',hStyle:'font-family:Georgia,serif;font-style:italic',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Glow Different'},
-     {label:'Subtext',text:'Premium beauty products for your unique story.'},
-     {label:'CTA',text:'Shop the Collection'},
-     {label:'Tagline',text:'Because beauty is confidence ✨'},
-     {label:'Promo',text:'Buy 2 Get 1 Free — This Weekend Only'},
-   ],
-   mood:'elegant'},
-
-  {keys:['tech','startup','saas','software','app','coding','developer','digital','ai'],id:'tech',label:'Tech / Startup',
-   palettes:[
-     {name:'Deep Blue',colors:['#040D1A','#0A1929','#1565C0','#42A5F5','#E3F2FD']},
-     {name:'Neon Dark',colors:['#050505','#0D0D1F','#6C63FF','#00D4FF','#FFFFFF']},
-     {name:'Matrix Green',colors:['#030A03','#0A1A0A','#00CC44','#66FF99','#F0FFF0']},
-   ],
-   fonts:[
-     {heading:'Inter',body:'Inter',hStyle:'font-family:sans-serif;font-weight:800',bStyle:'font-family:sans-serif;font-weight:400'},
-     {heading:'Space Grotesk',body:'DM Sans',hStyle:'font-family:sans-serif;font-weight:700',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Build. Ship. Scale.'},
-     {label:'Subtext',text:'The all-in-one platform for modern teams.'},
-     {label:'CTA',text:'Start Free Trial'},
-     {label:'Tagline',text:'Work smarter, not harder 🚀'},
-     {label:'Promo',text:'50% Off — First 3 Months'},
-   ],
-   mood:'minimal'},
-
-  {keys:['education','course','learn','teach','training','class','workshop','tutor','student'],id:'edu',label:'Education / Course',
-   palettes:[
-     {name:'Trust Blue',colors:['#0D2137','#1565C0','#42A5F5','#BBDEFB','#F5F9FF']},
-     {name:'Growth Green',colors:['#0D2A0D','#1B5E20','#4CAF50','#A5D6A7','#F1F8E9']},
-     {name:'Energy Yellow',colors:['#1A1000','#F57F17','#FFCA28','#FFF9C4','#FFFDE7']},
-   ],
-   fonts:[
-     {heading:'Nunito',body:'Open Sans',hStyle:'font-family:sans-serif;font-weight:800',bStyle:'font-family:sans-serif'},
-     {heading:'Poppins',body:'Lato',hStyle:'font-family:sans-serif;font-weight:700',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Learn. Grow. Succeed.'},
-     {label:'Subtext',text:'Join 10,000+ students mastering new skills today.'},
-     {label:'CTA',text:'Enroll Now — Free for 7 Days'},
-     {label:'Tagline',text:'Your next breakthrough is one course away 📚'},
-     {label:'Promo',text:'Early Bird: ₹999 → ₹499 (48 hrs only)'},
-   ],
-   mood:'friendly'},
-
-  {keys:['travel','tourism','adventure','explore','vacation','holiday','trip','destination'],id:'travel',label:'Travel / Tourism',
-   palettes:[
-     {name:'Ocean Horizon',colors:['#02111B','#03254C','#1167B1','#207BCA','#E0F0FF']},
-     {name:'Sunset Trail',colors:['#1A0A00','#8B3A00','#FF8C00','#FFD700','#FFF9E6']},
-     {name:'Tropical Lush',colors:['#0A1F0A','#1B5E20','#00897B','#4DB6AC','#E0F7F5']},
-   ],
-   fonts:[
-     {heading:'Oswald',body:'Lato',hStyle:'font-family:Impact,sans-serif;font-weight:700;text-transform:uppercase',bStyle:'font-family:sans-serif'},
-     {heading:'Playfair Display',body:'Open Sans',hStyle:'font-family:Georgia,serif;font-style:italic',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'The World is Waiting'},
-     {label:'Subtext',text:'Discover breathtaking destinations with handpicked itineraries.'},
-     {label:'CTA',text:'Plan My Trip'},
-     {label:'Tagline',text:'Adventure is out there ✈️'},
-     {label:'Promo',text:'Book Now & Save 30% on Packages'},
-   ],
-   mood:'bold'},
-
-  {keys:['real estate','property','home','house','apartment','rent','buy property','listing'],id:'realestate',label:'Real Estate',
-   palettes:[
-     {name:'Executive Navy',colors:['#050E1A','#0A2540','#1A4A8A','#C9A84C','#F8F4EE']},
-     {name:'Prestige Gold',colors:['#0A0800','#1A1400','#8B6914','#D4AF37','#FFFFF0']},
-     {name:'Clean White',colors:['#0D1117','#1C2733','#4A7C8C','#A8D4E0','#F5FBFD']},
-   ],
-   fonts:[
-     {heading:'Cormorant',body:'Raleway',hStyle:'font-family:Georgia,serif;font-weight:600',bStyle:'font-family:sans-serif;font-weight:300'},
-     {heading:'Cinzel',body:'Lato',hStyle:'font-family:Georgia,serif;text-transform:uppercase;letter-spacing:3px',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Find Your Dream Home'},
-     {label:'Subtext',text:'Premium properties in prime locations. Trusted by 5,000+ families.'},
-     {label:'CTA',text:'Schedule a Viewing'},
-     {label:'Tagline',text:'Where your story begins 🏠'},
-     {label:'Promo',text:'Zero Brokerage — This Month Only'},
-   ],
-   mood:'elegant'},
-
-  {keys:['finance','money','invest','trading','stock','mutual fund','crypto','wealth'],id:'finance',label:'Finance / Investment',
-   palettes:[
-     {name:'Wall Street',colors:['#060C0A','#0D2B22','#1A6B4A','#2ECC71','#E8FFF4']},
-     {name:'Gold Standard',colors:['#0A0800','#1A1200','#8B6914','#D4AF37','#FFFDF0']},
-     {name:'Trust Navy',colors:['#04080F','#0A1628','#1A3A6A','#4A7AB5','#E8F0FB']},
-   ],
-   fonts:[
-     {heading:'Merriweather',body:'Source Sans Pro',hStyle:'font-family:Georgia,serif;font-weight:700',bStyle:'font-family:sans-serif'},
-     {heading:'Inter',body:'Inter',hStyle:'font-family:sans-serif;font-weight:800',bStyle:'font-family:sans-serif'},
-   ],
-   copy:[
-     {label:'Headline',text:'Grow Your Wealth Smarter'},
-     {label:'Subtext',text:'Data-driven investment strategies for every goal.'},
-     {label:'CTA',text:'Get Free Consultation'},
-     {label:'Tagline',text:'Your money should work as hard as you do 📈'},
-     {label:'Promo',text:'Free Portfolio Review — Limited Slots'},
-   ],
-   mood:'minimal'},
-];
-
-const DEFAULT_NICHE = {
-  id:'general',label:'General',
-  palettes:[
-    {name:'Ocean Dark',colors:['#050D1A','#0A1E35','#1A4B8C','#4A9FD4','#E8F4FD']},
-    {name:'Purple Night',colors:['#080510','#1A0A2E','#6D28D9','#A78BFA','#F5F0FF']},
-    {name:'Forest Depth',colors:['#050F05','#0A2010','#1A6B3A','#4CAF50','#F0FFF0']},
-  ],
-  fonts:[
-    {heading:'Poppins',body:'Open Sans',hStyle:'font-family:sans-serif;font-weight:700',bStyle:'font-family:sans-serif'},
-    {heading:'Playfair Display',body:'Lato',hStyle:'font-family:Georgia,serif',bStyle:'font-family:sans-serif'},
-  ],
-  copy:[
-    {label:'Headline',text:'Make It Happen'},
-    {label:'Subtext',text:'The best time to start was yesterday. The next best time is now.'},
-    {label:'CTA',text:'Get Started Today'},
-    {label:'Tagline',text:'Built for those who dare to dream big ✨'},
-    {label:'Promo',text:'Limited Time Offer — Don\'t Miss Out!'},
-  ],
-  mood:'minimal'
-};
-
-const LAYOUTS = [
-  {id:'centered',label:'Centered',desc:'Bold headline, centered layout'},
-  {id:'split',label:'Split',desc:'Text left, visual right'},
-  {id:'overlay',label:'Overlay',desc:'Full-bleed background with text overlay'},
-];
-
-function detectPlatform(prompt){
-  const p = prompt.toLowerCase();
-  for(const plat of PLATFORMS){
-    if(plat.keys.some(k=>p.includes(k))) return plat;
-  }
-  // Default: Instagram post
-  return PLATFORMS[0];
-}
-
-function detectNiche(prompt){
-  const p = prompt.toLowerCase();
-  for(const n of NICHES){
-    if(n.keys.some(k=>p.includes(k))) return n;
-  }
-  return DEFAULT_NICHE;
-}
-
-function buildMockup(layout, palette, niche, platform, copySet, fontPair){
-  const [bg,c1,c2,c3,light] = palette.colors;
-  const isTall = platform.aspect && parseFloat(platform.aspect)>100;
-  const isWide = platform.aspect && parseFloat(platform.aspect)<60;
-
-  const headline = copySet.find(c=>c.label==='Headline')?.text || 'Your Headline Here';
-  const subtext  = copySet.find(c=>c.label==='Subtext')?.text || 'Your subtext goes here';
-  const cta      = copySet.find(c=>c.label==='CTA')?.text || 'Get Started';
-
-  const hStyle = fontPair.hStyle;
-  const bStyle = fontPair.bStyle;
-
-  if(layout === 'centered'){
-    return `
-    <div style="background:${bg};width:100%;padding-bottom:${platform.aspect};position:relative;border-radius:10px;overflow:hidden">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8%">
-        <div style="width:40px;height:3px;background:${c2};border-radius:2px;margin-bottom:16px"></div>
-        <div style="${hStyle};color:${light};font-size:clamp(12px,3.5vw,28px);text-align:center;margin-bottom:10px;line-height:1.1">${headline}</div>
-        <div style="${bStyle};color:${c3};font-size:clamp(8px,1.8vw,14px);text-align:center;margin-bottom:20px;opacity:.85;max-width:80%">${subtext}</div>
-        <div style="background:${c2};color:${bg};padding:8px 22px;border-radius:50px;${bStyle};font-size:clamp(8px,1.5vw,12px);font-weight:700">${cta}</div>
-        <div style="position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:30px;height:2px;background:${c2};opacity:.5;border-radius:1px"></div>
-      </div>
-      <div style="position:absolute;top:-20%;left:-20%;width:60%;height:60%;background:${c1};border-radius:50%;opacity:.25;filter:blur(40px)"></div>
-      <div style="position:absolute;bottom:-20%;right:-20%;width:60%;height:60%;background:${c2};border-radius:50%;opacity:.15;filter:blur(40px)"></div>
-    </div>`;
-  }
-
-  if(layout === 'split'){
-    return `
-    <div style="background:${bg};width:100%;padding-bottom:${platform.aspect};position:relative;border-radius:10px;overflow:hidden">
-      <div style="position:absolute;inset:0;display:flex">
-        <div style="width:55%;display:flex;flex-direction:column;justify-content:center;padding:6% 4% 6% 8%">
-          <div style="width:24px;height:3px;background:${c2};border-radius:2px;margin-bottom:10px"></div>
-          <div style="${hStyle};color:${light};font-size:clamp(10px,3vw,24px);margin-bottom:8px;line-height:1.15">${headline}</div>
-          <div style="${bStyle};color:${c3};font-size:clamp(7px,1.5vw,12px);margin-bottom:14px;opacity:.8;line-height:1.4">${subtext}</div>
-          <div style="display:inline-block;background:${c2};color:${bg};padding:6px 16px;border-radius:6px;${bStyle};font-size:clamp(7px,1.3vw,11px);font-weight:700;width:fit-content">${cta}</div>
-        </div>
-        <div style="width:45%;background:${c1};position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,${c1},${c2});opacity:.7"></div>
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(20px,6vw,50px)">
-            ${niche.id==='coffee'?'☕':niche.id==='fitness'?'💪':niche.id==='food'?'🍽️':niche.id==='beauty'?'✨':niche.id==='travel'?'✈️':niche.id==='tech'?'🚀':niche.id==='edu'?'📚':'🎯'}
-          </div>
-          <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,${bg},transparent)"></div>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  // Overlay
-  return `
-  <div style="background:linear-gradient(135deg,${bg},${c1});width:100%;padding-bottom:${platform.aspect};position:relative;border-radius:10px;overflow:hidden">
-    <div style="position:absolute;inset:0">
-      <div style="position:absolute;inset:0;background:linear-gradient(160deg,${c1}99,${bg}cc)"></div>
-      <div style="position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:${c2};border-radius:50%;opacity:.3;filter:blur(50px)"></div>
-      <div style="position:absolute;bottom:-20%;left:-10%;width:50%;height:50%;background:${c1};border-radius:50%;opacity:.4;filter:blur(40px)"></div>
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:6% 8%">
-        <div style="${hStyle};color:${light};font-size:clamp(11px,3.2vw,26px);margin-bottom:8px;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,.5)">${headline}</div>
-        <div style="${bStyle};color:${c3};font-size:clamp(7px,1.6vw,13px);margin-bottom:14px;opacity:.85">${subtext}</div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="background:${c2};color:${bg};padding:6px 18px;border-radius:50px;${bStyle};font-size:clamp(7px,1.3vw,11px);font-weight:700">${cta}</div>
-          <div style="width:28px;height:2px;background:${light};opacity:.4;border-radius:1px"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function generateTemplate(){
-  const prompt = document.getElementById('tpl-prompt').value.trim();
-  if(!prompt){ alert('Please enter a prompt first!'); return; }
-
-  const btn = document.getElementById('gen-btn');
-  btn.innerHTML = '<span class="spinner"></span> Generating...';
-  btn.disabled = true;
-
-  setTimeout(()=>{
-    const platform = detectPlatform(prompt);
-    const niche    = detectNiche(prompt);
-    const copySet  = niche.copy;
-    const canvaQuery = encodeURIComponent(prompt);
-
-    // Build 3 variations: different layout + palette each
-    const variations = LAYOUTS.map((layout, i)=>({
-      layout: layout.id,
-      layoutLabel: layout.label,
-      layoutDesc: layout.desc,
-      palette: niche.palettes[i % niche.palettes.length],
-      font: niche.fonts[i % niche.fonts.length],
-    }));
-
-    // Render tabs
-    document.getElementById('tpl-tabs').innerHTML = variations.map((v,i)=>
-      `<div class="tpl-tab${i===0?' active':''}" onclick="switchTab(${i})" id="tab-${i}">
-        ${['🅐','🅑','🅒'][i]} ${v.layoutLabel} Layout
-      </div>`
-    ).join('');
-
-    // Render panels
-    document.getElementById('tpl-panels').innerHTML = variations.map((v,i)=>`
-      <div class="tpl-panel${i===0?' active':''}" id="tpl-panel-${i}">
-        <div class="mockup-wrap">
-          <div>
-            <div class="dim-badge">📐 ${platform.label} — ${platform.w}×${platform.h}px (${platform.ratio})</div>
-            <div class="mockup">${buildMockup(v.layout,v.palette,niche,platform,copySet,v.font)}</div>
-            <div class="mockup-label">${v.layoutDesc} · ${niche.label}</div>
-          </div>
-        </div>
-        <div class="tpl-details">
-
-          <div class="detail-box">
-            <div class="detail-title">🎨 Color Palette — ${v.palette.name}</div>
-            <div class="palette">
-              ${v.palette.colors.map(c=>`
-                <div>
-                  <div class="swatch" style="background:${c}" title="${c}" onclick="navigator.clipboard&&navigator.clipboard.writeText('${c}')"></div>
-                  <div class="swatch-name">${c}</div>
-                </div>`).join('')}
-            </div>
-          </div>
-
-          <div class="detail-box">
-            <div class="detail-title">✏️ Font Pairing</div>
-            <div class="font-pair">
-              <div class="font-heading" style="${v.font.hStyle};color:#e2e8f0">${v.font.heading}</div>
-              <div class="font-body" style="${v.font.bStyle}">Used for body text and supporting copy</div>
-              <div>
-                <span class="font-tag">Heading: ${v.font.heading}</span>
-                <span class="font-tag" style="margin-left:5px">Body: ${v.font.body}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="detail-box">
-            <div class="detail-title">💬 Copy Suggestions (click to copy)</div>
-            <div class="copy-list">
-              ${copySet.map(c=>`
-                <div class="copy-item" onclick="navigator.clipboard&&navigator.clipboard.writeText('${c.text.replace(/'/g,"\\'")}')">
-                  <strong>${c.label}</strong>${c.text}
-                </div>`).join('')}
-            </div>
-          </div>
-
-          <div class="canva-cta">
-            <p>Open this concept directly in Canva and start editing</p>
-            <a class="open-canva" href="https://www.canva.com/search/templates?q=${canvaQuery}" target="_blank">Open in Canva →</a>
-          </div>
-
-        </div>
-      </div>
-    `).join('');
-
-    document.getElementById('canva-output').classList.add('show');
-    btn.innerHTML = '✨ Generate Templates';
-    btn.disabled = false;
-    document.getElementById('canva-output').scrollIntoView({behavior:'smooth',block:'start'});
-  }, 900);
-}
-
-function switchTab(idx){
-  document.querySelectorAll('.tpl-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  document.querySelectorAll('.tpl-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
-}
-
 function showResults(){
   const skills  = getSelected('skill-chips');
   const capital = getSelected('capital-chips')[0]||'none';
   const style   = getSelected('style-chips')[0]||'both';
-  const goal    = getSelected('goal-chips')[0]||'20k';
   const prefs   = getSelected('pref-chips');
   const hours   = parseInt(document.getElementById('time-slider').value);
+  const capRank = {none:0,low:1,medium:2,high:3};
 
-  const capitalRank={'none':0,'low':1,'medium':2,'high':3};
-  const goalVal={'5k':5000,'20k':20000,'50k':50000,'100k':100000};
-
-  // Score each idea
   const scored = IDEAS.map(idea=>{
     let score=0;
-    // Skill match
     if(idea.skills.length===0) score+=5;
-    else{
-      const match=idea.skills.filter(s=>skills.includes(s)).length;
-      score+=match*20;
-    }
-    // Capital
-    const capMap={'none':0,'low':1,'medium':2,'high':3};
-    if(capMap[idea.capital]<=capitalRank[capital]) score+=10;
-    // Time fit
+    else score+=idea.skills.filter(s=>skills.includes(s)).length*20;
+    if(capRank[idea.capital]<=capRank[capital]) score+=10;
     if(idea.time<=hours) score+=10;
-    // Work style
     if(style==='both') score+=5;
     else if(style==='online'&&idea.online) score+=10;
     else if(style==='offline'&&!idea.online) score+=10;
-    // Prefs
-    prefs.forEach(p=>{
-      if(idea[p]) score+=12;
-    });
+    prefs.forEach(p=>{ if(idea[p]) score+=12; });
     return {...idea,score};
-  });
+  }).filter(i=>i.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
 
-  scored.sort((a,b)=>b.score-a.score);
-  const top=scored.filter(i=>i.score>0).slice(0,18);
+  const cats=['All',...new Set(scored.map(i=>i.cat))];
 
-  // Categories for filter
-  const cats=['All',...new Set(top.map(i=>i.cat))];
-
-  // Render summary
-  const avgEarn=top.length;
   document.getElementById('summary-bar').innerHTML=`
-    <div class="sum-stat"><div class="sum-val">${top.length}</div><div class="sum-lbl">Opportunities Found</div></div>
+    <div class="sum-stat"><div class="sum-val">${scored.length}</div><div class="sum-lbl">Matches Found</div></div>
     <div class="sum-div"></div>
     <div class="sum-stat"><div class="sum-val">${skills.length||'Any'}</div><div class="sum-lbl">Skills Matched</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">${hours}h</div><div class="sum-lbl">Weekly Availability</div></div>
+    <div class="sum-stat"><div class="sum-val">${hours}h</div><div class="sum-lbl">Available / Week</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">${capital==='none'?'₹0':capital==='low'?'₹10k':capital==='medium'?'₹50k':'₹50k+'}</div><div class="sum-lbl">Available Capital</div></div>
-  `;
+    <div class="sum-stat"><div class="sum-val">${prefs.length||0}</div><div class="sum-lbl">Preferences Set</div></div>`;
 
-  // Render filter chips
-  document.getElementById('filter-bar').innerHTML=
-    '<span>Filter:</span>'+
-    cats.map(c=>`<div class="f-chip${c==='All'?' active':''}" data-cat="${c}" onclick="filterCat(this,'${c}')">${c}</div>`).join('');
+  document.getElementById('filter-bar').innerHTML='<span>Filter:</span>'+
+    cats.map(c=>`<div class="f-chip${c==='All'?' active':''}" onclick="filterCat(this,'${c}')">${c}</div>`).join('');
 
-  renderCards(top,'All');
+  window._cards=scored;
+  renderCards(scored,'All');
   go(4);
 }
 
 function filterCat(el,cat){
   document.querySelectorAll('.f-chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
-  activeFilter=cat;
-  // get all cards and re-render
-  renderCards(window._allCards,cat);
+  renderCards(window._cards,cat);
 }
 
 function renderCards(cards,cat){
-  window._allCards=cards;
   const grid=document.getElementById('results-grid');
-  const filtered=cat==='All'?cards:cards.filter(c=>c.cat===cat);
-  if(!filtered.length){
-    grid.innerHTML=`<div class="empty"><span>🔍</span>No results in this category</div>`;
-    return;
-  }
-  grid.innerHTML=filtered.map(idea=>{
-    const diffClass={'easy':'diff-easy','medium':'diff-medium','hard':'diff-hard'}[idea.diff];
-    const diffLabel={'easy':'Easy Start','medium':'Medium','hard':'Advanced'}[idea.diff];
-    return `
+  const list=cat==='All'?cards:cards.filter(c=>c.cat===cat);
+  if(!list.length){ grid.innerHTML='<div class="empty"><span>🔍</span>No results in this category</div>'; return; }
+  const diffCls={easy:'diff-easy',medium:'diff-medium',hard:'diff-hard'};
+  const diffLbl={easy:'Easy Start',medium:'Medium',hard:'Advanced'};
+  grid.innerHTML=list.map(idea=>`
     <div class="result-card">
       <div class="rc-top">
         <div class="rc-icon">${idea.icon}</div>
         <div class="rc-badges">
-          <span class="badge badge-earn">${idea.earn}</span>
-          <span class="badge-diff ${diffClass}">${diffLabel}</span>
+          <span class="badge-earn">${idea.earn}</span>
+          <span class="badge-diff ${diffCls[idea.diff]}">${diffLbl[idea.diff]}</span>
         </div>
       </div>
       <div class="rc-title">${idea.title}</div>
       <div class="rc-desc">${idea.desc}</div>
       <div class="rc-tags">${idea.tags.map(t=>`<span class="rc-tag">${t}</span>`).join('')}</div>
-      <div class="rc-time">
-        ⏱️ Needs ~${idea.time}h/week &nbsp;·&nbsp; ${idea.online?'💻 Online':'🏘️ Local'} &nbsp;·&nbsp; ${idea.passive?'😴 Can be passive':'⚡ Active'}
-      </div>
-      ${idea.links ? `<div class="rc-links">${idea.links.map(lk=>`<a class="rc-link" href="${lk.u}" target="_blank" rel="noopener">↗ ${lk.l}</a>`).join('')}</div>` : ''}
-    </div>`;
-  }).join('');
+      <div class="rc-time">⏱️ ~${idea.time}h/week &nbsp;·&nbsp; ${idea.online?'💻 Online':'🏘️ Local'} &nbsp;·&nbsp; ${idea.passive?'😴 Passive':'⚡ Active'}</div>
+      <div class="rc-links">${idea.links.map(lk=>`<a class="rc-link" href="${lk.u}" target="_blank" rel="noopener">↗ ${lk.l}</a>`).join('')}</div>
+    </div>`).join('');
 }
 
 function restart(){
-  // clear all selections
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
   document.querySelector('#capital-chips .chip').classList.add('sel');
   go(1);
