@@ -148,6 +148,13 @@
   .rc-start{font-size:.79rem;color:var(--muted);line-height:1.5;margin-bottom:10px}
   .error-state{grid-column:1/-1;text-align:center;padding:40px 20px}
   .error-state span{font-size:2rem;display:block;margin-bottom:10px;color:#f87171}
+
+  /* CITY INPUT */
+  .city-input{width:100%;background:var(--tag);border:1px solid var(--border);border-radius:8px;
+    padding:10px 14px;font-size:.9rem;color:var(--text);outline:none;transition:.15s;font-family:inherit}
+  .city-input:focus{border-color:var(--accent);background:#0f1e36}
+  .city-input::placeholder{color:var(--muted)}
+  .opt-label{font-size:.75rem;color:var(--muted);font-weight:400;margin-left:6px}
 </style>
 </head>
 <body>
@@ -235,6 +242,13 @@
           <div class="chip" data-v="offline">🏘️ Local / In-person</div>
           <div class="chip" data-v="both">🔄 Either is fine</div>
         </div>
+      </div>
+
+      <h2 style="margin-top:22px"><div class="icon">📍</div>Your city or region?<span class="opt-label">optional</span></h2>
+      <div class="q-group">
+        <input type="text" id="city-input" class="city-input"
+          placeholder="e.g. Mumbai, London, New York, Dubai…"
+          autocomplete="off"/>
       </div>
     </div>
     <div class="btn-row">
@@ -642,6 +656,7 @@ async function showResults(){
   const prefs   = getSelected('pref-chips');
   const hours   = parseInt(document.getElementById('time-slider').value);
   const incomeGoal = getSelected('goal-chips')[0]||'mid';
+  const city    = document.getElementById('city-input').value.trim();
 
   // Switch to results panel immediately
   go(4);
@@ -653,7 +668,7 @@ async function showResults(){
     <div class="sum-div"></div>
     <div class="sum-stat"><div class="sum-val">${(GOAL_LABELS[incomeGoal]||incomeGoal).split('/')[0]}</div><div class="sum-lbl">Goal</div></div>
     <div class="sum-div"></div>
-    <div class="sum-stat"><div class="sum-val">🤖 AI</div><div class="sum-lbl">Live Search</div></div>`;
+    <div class="sum-stat"><div class="sum-val">${city||'🌍 Global'}</div><div class="sum-lbl">Location</div></div>`;
 
   document.getElementById('filter-bar').innerHTML='';
   document.getElementById('results-grid').innerHTML=`
@@ -669,6 +684,7 @@ async function showResults(){
     workStyle: STYLE_LABELS[style]||style,
     incomeGoal: GOAL_LABELS[incomeGoal]||incomeGoal,
     priority: prefs.map(p=>PREF_LABELS[p]||p).join(', ')||'not specified',
+    city: city||'',
   };
 
   try {
@@ -747,6 +763,7 @@ function renderCards(cards,cat){
 function restart(){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
   document.querySelector('#capital-chips .chip').classList.add('sel');
+  document.getElementById('city-input').value='';
   go(1);
 }
 </script>
